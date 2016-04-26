@@ -12,7 +12,7 @@ import CoreLocation
 
 class Resto {
     
-    let restoId:Int
+    let restoId:String
     var name: String
     var position : CLLocation
     var description : String?
@@ -21,7 +21,7 @@ class Resto {
         return 0
     }
     var address: String {
-        return "inconnue"
+        return "120 rue des poissonniers 75018 PARIS"
     }
     var image: UIImage?
     var priceRange : PriceRange?
@@ -31,7 +31,7 @@ class Resto {
     
     
     
-    init (restoId:Int,name: String, position: CLLocation){
+    init (restoId:String,name: String, position: CLLocation){
         self.restoId = restoId
         self.name = name
         self.position = position

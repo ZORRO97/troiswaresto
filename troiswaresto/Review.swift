@@ -12,7 +12,9 @@ class Review {
     var description:String?
     var rating:Double
     var nickname:String?
-    init(rating:Double){
-        self.rating = rating        
+    var restoId: Int
+    init(rating:Double, restoId : Int){
+        self.rating = rating
+        self.restoId = restoId
     }
 }

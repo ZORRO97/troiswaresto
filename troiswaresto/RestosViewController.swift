@@ -15,7 +15,7 @@ class RestosViewController: UIViewController {
     @IBOutlet var myTableView:UITableView!
     
     var restos = [Resto]()
-    var myResto: Resto!
+    // var myResto: Resto!
     
     @IBAction func backButtonPressed() {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -25,23 +25,33 @@ class RestosViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "todetail" {
             let mydestination: RestoDetailViewController = segue.destinationViewController as! RestoDetailViewController
-            mydestination.resto = myResto
+            mydestination.resto = restos[myTableView.indexPathForSelectedRow!.row]
+            mydestination.restos = restos
         }
+        if segue.identifier == "tomap" {
+            let myDestination : MapViewController = segue.destinationViewController as! MapViewController
+            myDestination.allRestos = restos
+        }
+    }
+    
+    func initResto(){
+        /*restos.append(Resto(restoId: 1, name: "Le serbe", position: CLLocation(latitude: 48.953, longitude: 2.30)))
+        
+        
+        restos.append(Resto(restoId: 2, name: "le basque", position: CLLocation(latitude: 48.653, longitude: 2.37)))
+        
+        restos.append(Resto(restoId: 2, name: "le landais", position: CLLocation(latitude: 48.843, longitude: 2.38)))
+         */
+        
+        restos.append(Resto(restoId: "1", name: "Le Serbe", position: CLLocation(latitude:  48.893741, longitude: 2.350840)))
+        restos.append(Resto(restoId: "2", name: "Le Basque", position: CLLocation(latitude: 48.894156, longitude: 2.353471)))
+        restos.append(Resto(restoId: "3", name: "Franprix", position: CLLocation(latitude: 48.891420, longitude: 2.351799)))
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        restos.append(Resto(restoId: 1, name: "Le serbe", position: CLLocation(latitude: 50.0, longitude: 40.0)))
-        
-        
-        restos.append(Resto(restoId: 2, name: "le basque", position: CLLocation(latitude: 78.12, longitude: 41.154)))
-        /*
-        restos.append(Resto(restoId: 1, name: "Le basque", position: CLLocation(latitude: CLLocationDegrees(50.0) ,
-            longitude: CLLocationDegrees(60.0))
-        )
-         */
-
+        initResto()
         // Do any additional setup after loading the view.
     }
     
@@ -103,7 +113,7 @@ extension RestosViewController : UITableViewDelegate, UITableViewDataSource {
         let selectedRow = indexPath.row
         //faire quelque chose avec selectedRow
         NSLog("Ligne sélectionnée \(selectedRow)")
-        myResto = restos[indexPath.row]
+        // myResto = restos[indexPath.row]
         self.performSegueWithIdentifier("todetail", sender: self)
         
         tableView.deselectRowAtIndexPath(indexPath, animated: false)

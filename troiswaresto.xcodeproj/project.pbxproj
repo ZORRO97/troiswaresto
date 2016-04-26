@@ -21,6 +21,11 @@
 		FCCBF0381CCE4D8C00C0B7DB /* RestosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF0371CCE4D8C00C0B7DB /* RestosViewController.swift */; };
 		FCCBF03A1CCE58ED00C0B7DB /* RestoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF0391CCE58ED00C0B7DB /* RestoCell.swift */; };
 		FCCBF03C1CCE5D1B00C0B7DB /* RestoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF03B1CCE5D1B00C0B7DB /* RestoDetailViewController.swift */; };
+		FCCBF03E1CCF5C6900C0B7DB /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF03D1CCF5C6900C0B7DB /* ReviewCell.swift */; };
+		FCCBF0401CCF795A00C0B7DB /* AddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF03F1CCF795A00C0B7DB /* AddCell.swift */; };
+		FCCBF0421CCF809700C0B7DB /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF0411CCF809700C0B7DB /* CommentViewController.swift */; };
+		FCCBF0441CCF928600C0B7DB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF0431CCF928600C0B7DB /* MapViewController.swift */; };
+		FCCBF0461CCF9AAE00C0B7DB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF0451CCF9AAE00C0B7DB /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +66,11 @@
 		FCCBF0371CCE4D8C00C0B7DB /* RestosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestosViewController.swift; sourceTree = "<group>"; };
 		FCCBF0391CCE58ED00C0B7DB /* RestoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestoCell.swift; sourceTree = "<group>"; };
 		FCCBF03B1CCE5D1B00C0B7DB /* RestoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestoDetailViewController.swift; sourceTree = "<group>"; };
+		FCCBF03D1CCF5C6900C0B7DB /* ReviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		FCCBF03F1CCF795A00C0B7DB /* AddCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCell.swift; sourceTree = "<group>"; };
+		FCCBF0411CCF809700C0B7DB /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		FCCBF0431CCF928600C0B7DB /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		FCCBF0451CCF9AAE00C0B7DB /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +101,7 @@
 		FCCBEFF31CCE481F00C0B7DB = {
 			isa = PBXGroup;
 			children = (
+				FCCBF0411CCF809700C0B7DB /* CommentViewController.swift */,
 				FCCBEFFE1CCE481F00C0B7DB /* troiswaresto */,
 				FCCBF0161CCE481F00C0B7DB /* troiswarestoTests */,
 				FCCBF0211CCE481F00C0B7DB /* troiswarestoUITests */,
@@ -117,6 +128,9 @@
 				FCCBF0371CCE4D8C00C0B7DB /* RestosViewController.swift */,
 				FCCBF03B1CCE5D1B00C0B7DB /* RestoDetailViewController.swift */,
 				FCCBF0031CCE481F00C0B7DB /* Main.storyboard */,
+				FCCBF0431CCF928600C0B7DB /* MapViewController.swift */,
+				FCCBF03F1CCF795A00C0B7DB /* AddCell.swift */,
+				FCCBF03D1CCF5C6900C0B7DB /* ReviewCell.swift */,
 				FCCBF0391CCE58ED00C0B7DB /* RestoCell.swift */,
 				FCCBF0091CCE481F00C0B7DB /* Assets.xcassets */,
 				FCCBF00B1CCE481F00C0B7DB /* LaunchScreen.storyboard */,
@@ -150,6 +164,7 @@
 			children = (
 				FCCBF0331CCE48E000C0B7DB /* Resto.swift */,
 				FCCBF0351CCE4A1500C0B7DB /* Review.swift */,
+				FCCBF0451CCF9AAE00C0B7DB /* Model.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -286,13 +301,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCCBF0021CCE481F00C0B7DB /* MainViewController.swift in Sources */,
+				FCCBF03E1CCF5C6900C0B7DB /* ReviewCell.swift in Sources */,
 				FCCBF0081CCE481F00C0B7DB /* troiswaresto.xcdatamodeld in Sources */,
 				FCCBF03C1CCE5D1B00C0B7DB /* RestoDetailViewController.swift in Sources */,
 				FCCBF0341CCE48E000C0B7DB /* Resto.swift in Sources */,
 				FCCBF0311CCE486000C0B7DB /* Utilities.swift in Sources */,
+				FCCBF0441CCF928600C0B7DB /* MapViewController.swift in Sources */,
+				FCCBF0461CCF9AAE00C0B7DB /* Model.swift in Sources */,
 				FCCBF0001CCE481F00C0B7DB /* AppDelegate.swift in Sources */,
 				FCCBF0381CCE4D8C00C0B7DB /* RestosViewController.swift in Sources */,
+				FCCBF0421CCF809700C0B7DB /* CommentViewController.swift in Sources */,
 				FCCBF03A1CCE58ED00C0B7DB /* RestoCell.swift in Sources */,
+				FCCBF0401CCF795A00C0B7DB /* AddCell.swift in Sources */,
 				FCCBF0361CCE4A1500C0B7DB /* Review.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -522,6 +542,7 @@
 				FCCBF0291CCE481F00C0B7DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FCCBF02A1CCE481F00C0B7DB /* Build configuration list for PBXNativeTarget "troiswarestoTests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +551,7 @@
 				FCCBF02C1CCE481F00C0B7DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FCCBF02D1CCE481F00C0B7DB /* Build configuration list for PBXNativeTarget "troiswarestoUITests" */ = {
 			isa = XCConfigurationList;
@@ -538,6 +560,7 @@
 				FCCBF02F1CCE481F00C0B7DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
