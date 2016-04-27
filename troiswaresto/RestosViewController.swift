@@ -35,28 +35,23 @@ class RestosViewController: UIViewController {
     }
     
     func initResto(){
-        /*restos.append(Resto(restoId: 1, name: "Le serbe", position: CLLocation(latitude: 48.953, longitude: 2.30)))
-        
-        
-        restos.append(Resto(restoId: 2, name: "le basque", position: CLLocation(latitude: 48.653, longitude: 2.37)))
-        
-        restos.append(Resto(restoId: 2, name: "le landais", position: CLLocation(latitude: 48.843, longitude: 2.38)))
-         */
-        
+                
+        /*
         restos.append(Resto(restoId: "1", name: "Le Serbe", position: CLLocation(latitude:  48.893741, longitude: 2.350840)))
         restos.append(Resto(restoId: "2", name: "Le Basque", position: CLLocation(latitude: 48.894156, longitude: 2.353471)))
         restos.append(Resto(restoId: "3", name: "Franprix", position: CLLocation(latitude: 48.891420, longitude: 2.351799)))
+    */
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initResto()
+        // initResto()
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         myTableView.reloadData()
     }
 
@@ -103,7 +98,19 @@ extension RestosViewController : UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.text  = restos[indexPath.row].name
         cell.cellImageView.image = UIImage(named: "icon120")
         cell.distanceLabel.text = "\(restos[indexPath.row].distance)"
-        cell.priceRangeLabel.text = "Pourri"
+        if let myPriceRange = restos[indexPath.row].priceRange {
+            switch myPriceRange {
+            case .Cheap : cell.priceRangeLabel.text = "Bon Marché"
+            case .Normal : cell.priceRangeLabel.text = "Normal"
+            case .Expensive : cell.priceRangeLabel.text = "très cher"
+                
+            }
+        } else {
+            
+        
+         cell.priceRangeLabel.text = "Inconnu"
+        }
+        cell.priceRangeLabel.text = textePriceRange(restos[indexPath.row].priceRange)
         cell.rateLabel.text = "4 étoiles"
         
         return cell

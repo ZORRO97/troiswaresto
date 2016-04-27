@@ -32,12 +32,14 @@ class RestoDetailViewController: UIViewController {
     }
     
     func initReview(){
-        reviews.append(Review(rating: 2, restoId: 1))
+        reviews = self.resto.reviews
+       /* reviews.append(Review(rating: 2, restoId: 1))
         reviews.append(Review(rating: 3, restoId: 1))
         reviews[0].nickname = "Penible22"
         reviews[0].description = "Lamentable n'y allez pas !"
         reviews[1].nickname = "Mecene34"
         reviews[1].description = "Super ambiance décalée"
+    */
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -74,9 +76,10 @@ class RestoDetailViewController: UIViewController {
         }
         ratingLabel.text = "\(resto.rating)"
         // priceRange
-        if let myPriceRange = resto.priceRange {
-            priceLabel.text = "\(myPriceRange)"
-        }
+        priceLabel.text = textePriceRange(resto.priceRange)
+        //if let myPriceRange = resto.priceRange {
+        //    priceLabel.text = "\(myPriceRange)"
+        //}
         distanceLabel.text = "\(resto.distance) m"
         addressLabel.text = resto.address
         

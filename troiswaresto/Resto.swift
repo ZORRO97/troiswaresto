@@ -36,12 +36,15 @@ class Resto {
         self.name = name
         self.position = position
         
+        
     }
     
 }
 
-enum PriceRange {
-    case Cheap
-    case Normal
-    case Expensive
+enum PriceRange: Int {
+    case Cheap = 0
+    case Normal = 1
+    case Expensive = 2
+    // PriceRange(rawValue: <#T##Int#>) récupérer valeur PriceRange à partir de l'entier correspondant
+    // let toto = PriceRange.Cheap.rawValue récupérer la valeur de l'entier correspondant
 }

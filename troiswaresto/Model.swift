@@ -8,6 +8,9 @@
 
 import Foundation
 import MapKit
+import Alamofire
+import SwiftyJSON
+
 
 enum ScreenType {
     case Home
@@ -69,4 +72,79 @@ class Pin: NSObject, MKAnnotation {
     var subtitle: String? {
         return ""
     }
+}
+
+//func getRestosInfo(){
+    
+//}
+
+func getRestosInfo(completionHandler: (allRestos :[Resto])->()){
+    // URL spécifique de Firebase
+    let urlString = "\(firebaseUrl)/data.json"
+    //var output = [Resto]()
+    var allRestos = [Resto]()
+    
+    NSLog("debut de getRestosInfo")
+    
+    Alamofire.request(.GET, urlString, parameters : nil)
+        .response { (request, response, data, error) in
+            NSLog("Résultat de la requête reçu")
+            if (error == nil && data != nil) {
+                
+                
+                let json = JSON(data: data!) // tableau de json
+                
+                let myResto = json["resto"]
+                
+                print(myResto)
+                
+                for (key,subJson):(String, JSON) in myResto {
+                    print(key)
+                    print(subJson["name"])
+                    //Do something you want
+                    if let myName = subJson["name"].string , let myLatitude = subJson["position"]["lat"].double, let myLongitude = subJson["position"]["long"].double {
+                        let myResto = Resto(restoId: key, name: myName , position: CLLocation(latitude: CLLocationDegrees(myLatitude), longitude: CLLocationDegrees(myLongitude) ))
+                        if let myDescription = subJson["description"].string {
+                            myResto.description = myDescription
+                        }
+                        
+                        if let priceRange = subJson["priceRange"].int {
+                            myResto.priceRange = PriceRange(rawValue: priceRange)
+                        }
+                        if  subJson["reviews"] != nil {
+                            for review in subJson["reviews"] {
+                                if let myRating = review["rating"].double {
+                                    let myReview = Review(rating: myRating, restoId: key)
+                                    if let myReviewDescription = review["description"].string {
+                                        myReview.description = myReviewDescription
+                                    }
+                                }
+                            }
+                        }
+                        
+                        allRestos.append(myResto)
+                    }
+                }
+                               completionHandler(allRestos: allRestos)
+            } else {
+                NSLog("error in GetSimpleResto=\(error)")
+            }
+            
+            NSLog("Fin du traitement de la requête")        }
+    NSLog("fonction getRestosInfo terminée")
+}
+
+func textePriceRange(priceRange: PriceRange?)->String {
+    
+    var output:String
+    if let myPriceRange = priceRange {
+        switch myPriceRange {
+            case .Cheap : output = "Bon Marché"
+            case .Normal : output = "Normal"
+            case .Expensive : output = "très cher"
+        }
+    } else {
+        output = "Inconnu"
+    }
+    return output
 }

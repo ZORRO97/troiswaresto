@@ -13,6 +13,12 @@ class CommentViewController: UIViewController {
     var resto: Resto!
     var reviews:[Review]!
     var restoDetailViewController: RestoDetailViewController!
+    
+    @IBAction func validReviewPressed(){
+        print("on valide la nouvelle review")
+        // enregistrer les nouvelles données
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
