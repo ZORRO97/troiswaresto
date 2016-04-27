@@ -74,10 +74,25 @@ class Pin: NSObject, MKAnnotation {
     }
 }
 
-//func getRestosInfo(){
-    
-//}
-
+func getDetailReviews(rewJson: JSON)->[Review] {
+    var output = [Review]()
+    for (_,dJson):(String,JSON) in rewJson {
+        if let myRating = dJson["rating"].double {
+            
+        
+         let myReview = Review(rating: myRating)
+            if let myDescription = dJson["description"].string {
+                myReview.description = myDescription
+            }
+            if let myNickname = dJson["nickname"].string {
+                myReview.nickname = myNickname
+            }
+            output.append(myReview)
+        }
+        
+    }
+    return output
+}
 func getRestosInfo(completionHandler: (allRestos :[Resto])->()){
     // URL spécifique de Firebase
     let urlString = "\(firebaseUrl)/data.json"
@@ -96,7 +111,7 @@ func getRestosInfo(completionHandler: (allRestos :[Resto])->()){
                 
                 let myResto = json["resto"]
                 
-                print(myResto)
+                // print(myResto)
                 
                 for (key,subJson):(String, JSON) in myResto {
                     print(key)
@@ -104,24 +119,21 @@ func getRestosInfo(completionHandler: (allRestos :[Resto])->()){
                     //Do something you want
                     if let myName = subJson["name"].string , let myLatitude = subJson["position"]["lat"].double, let myLongitude = subJson["position"]["long"].double {
                         let myResto = Resto(restoId: key, name: myName , position: CLLocation(latitude: CLLocationDegrees(myLatitude), longitude: CLLocationDegrees(myLongitude) ))
-                        if let myDescription = subJson["description"].string {
-                            myResto.description = myDescription
-                        }
                         
-                        if let priceRange = subJson["priceRange"].int {
-                            myResto.priceRange = PriceRange(rawValue: priceRange)
-                        }
-                        if  subJson["reviews"] != nil {
-                            for review in subJson["reviews"] {
-                                if let myRating = review["rating"].double {
-                                    let myReview = Review(rating: myRating, restoId: key)
-                                    if let myReviewDescription = review["description"].string {
-                                        myReview.description = myReviewDescription
+                        for (rkey,detJson):(String, JSON) in subJson {
+                            switch rkey {
+                                case "description": myResto.description = detJson.string
+                                case "priceRange":
+                                    if let priceRange = detJson.int {
+                                        myResto.priceRange = PriceRange(rawValue: priceRange)
                                     }
-                                }
+                                case "reviews":
+                                    myResto.reviews = getDetailReviews(detJson)
+                            default:
+                                NSLog("clé \(rkey) non traitée")
+                                break
                             }
                         }
-                        
                         allRestos.append(myResto)
                     }
                 }

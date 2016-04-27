@@ -283,6 +283,7 @@
 				TargetAttributes = {
 					FCCBEFFB1CCE481F00C0B7DB = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = HU4UZMPT62;
 					};
 					FCCBF0121CCE481F00C0B7DB = {
 						CreatedOnToolsVersion = 7.3;
@@ -553,11 +554,14 @@
 			baseConfigurationReference = 944A6DF970D8BC0F6AD6091D /* Pods-troiswaresto.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = troiswaresto/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.smallhead.troiswaresto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -566,11 +570,14 @@
 			baseConfigurationReference = 4630B55084E73804815DA6E2 /* Pods-troiswaresto.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = troiswaresto/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.smallhead.troiswaresto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
