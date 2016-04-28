@@ -22,6 +22,8 @@ class MapViewController: UIViewController {
     
     var monPin:Pin!
     
+    
+    
     // Action pour le bouton retour
     @IBAction func backButtonPressed(){
         print("Button back pressed")
@@ -31,6 +33,17 @@ class MapViewController: UIViewController {
     @IBAction func flecheButtonPressed(){
         self.showUserLocation()
         mapView.setCenterCoordinate(mapView.userLocation.coordinate, animated: true)
+    }
+    
+    @IBAction func addRestoPressed(){
+        print("bouton add resto pressed")
+        let alert = UIAlertController(title: "Nouveau resto", message: "Voulez vous ajouter un nouveau resto ?", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ajouter", style: UIAlertActionStyle.Default) { (UIAlertAction) in
+            self.performSegueWithIdentifier("tonewresto", sender: self) })
+            
+        alert.addAction(UIAlertAction(title: "Annuler", style: .Default, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     // ajouter les pins pour une liste de stations
@@ -61,6 +74,10 @@ class MapViewController: UIViewController {
         if segue.identifier == "rewind" {
             let mydestination : RestoDetailViewController = segue.destinationViewController as! RestoDetailViewController
             mydestination.resto = selectedResto!
+            mydestination.restos = allRestos
+        }
+        if segue.identifier == "tonewresto" {
+            let mydestination : NewRestoViewController = segue.destinationViewController as! NewRestoViewController
             mydestination.restos = allRestos
         }
     }

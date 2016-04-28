@@ -118,3 +118,36 @@ func getUserLanguage()->String {//from defined languages in localisation, "en" a
     
     return output
 }
+
+/**
+ Récupère une image dans une url donnée
+ 
+ Fonction **synchrone**.
+ 
+ Renvoie nil en cas d'erreur
+ */
+
+func getImageFromURL(fileURL: String)->UIImage? {
+    print("loading remote image:\(fileURL)")
+    
+    if let myurl = NSURL(string: fileURL) {
+        if let mydata = NSData(contentsOfURL: myurl) {
+            if let result = UIImage(data: mydata) {
+                return result
+            } else {
+                logWarning("pb pour convertir en UIImage pour fileUrl=\(fileURL)")
+                return nil
+            }
+        } else {
+            logWarning("pb pour convertir en NSData")
+            return nil
+        }
+    } else {
+        logWarning("error: not a valid url for:\(fileURL)")
+        return nil
+    }
+}
+
+// TODO: ajouter le champ "fileUrl" dans Firebase
+// récupérer cette valeur dans la requête Alamofire
+// utiliser cette fonction pour récupérer de façon synchrone l'image du restaurant et l'ajouter à l'objet resto

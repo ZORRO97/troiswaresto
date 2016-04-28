@@ -96,7 +96,11 @@ extension RestosViewController : UITableViewDelegate, UITableViewDataSource {
         // la variable indexpath.row indique la ligne selectionnée
         // on accède aux IBOutlet de la cellule avec par exemple : cell.name =
         cell.nameLabel.text  = restos[indexPath.row].name
+        if let myImage = restos[indexPath.row].image {
+            cell.cellImageView.image = myImage
+        } else {
         cell.cellImageView.image = UIImage(named: "icon120")
+        }
         cell.distanceLabel.text = "\(restos[indexPath.row].distance)"
         if let myPriceRange = restos[indexPath.row].priceRange {
             switch myPriceRange {

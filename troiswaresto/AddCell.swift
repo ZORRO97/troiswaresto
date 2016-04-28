@@ -10,5 +10,5 @@ import Foundation
 import UIKit
 
 class AddCell : UITableViewCell {
-    @IBOutlet var addButton: UIButton!
+    @IBOutlet var addImageView: UIImageView!
 }

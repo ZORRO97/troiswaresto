@@ -114,8 +114,8 @@ func getRestosInfo(completionHandler: (allRestos :[Resto])->()){
                 // print(myResto)
                 
                 for (key,subJson):(String, JSON) in myResto {
-                    print(key)
-                    print(subJson["name"])
+                    // print(key)
+                    // print(subJson["name"])
                     //Do something you want
                     if let myName = subJson["name"].string , let myLatitude = subJson["position"]["lat"].double, let myLongitude = subJson["position"]["long"].double {
                         let myResto = Resto(restoId: key, name: myName , position: CLLocation(latitude: CLLocationDegrees(myLatitude), longitude: CLLocationDegrees(myLongitude) ))
@@ -127,10 +127,14 @@ func getRestosInfo(completionHandler: (allRestos :[Resto])->()){
                                     if let priceRange = detJson.int {
                                         myResto.priceRange = PriceRange(rawValue: priceRange)
                                     }
-                                case "reviews":
+                            case "fileURL" :
+                                if let myURL = detJson.string {
+                                    myResto.image = getImageFromURL(myURL)
+                                }
+                            case "reviews":
                                     myResto.reviews = getDetailReviews(detJson)
                             default:
-                                NSLog("clé \(rkey) non traitée")
+                                // NSLog("clé \(rkey) non traitée")
                                 break
                             }
                         }
@@ -160,3 +164,4 @@ func textePriceRange(priceRange: PriceRange?)->String {
     }
     return output
 }
+

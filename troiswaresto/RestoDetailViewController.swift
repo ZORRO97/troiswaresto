@@ -12,7 +12,12 @@ class RestoDetailViewController: UIViewController {
     
     @IBOutlet var restoImageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var ratingLabel : UILabel!
+    // @IBOutlet var ratingLabel : UILabel!
+    @IBOutlet var star1ImageView: UIImageView!
+    @IBOutlet var star2ImageView: UIImageView!
+    @IBOutlet var star3ImageView: UIImageView!
+    @IBOutlet var star4ImageView: UIImageView!
+    @IBOutlet var star5ImageView: UIImageView!
     @IBOutlet var priceLabel : UILabel!
     @IBOutlet var distanceLabel : UILabel!
     @IBOutlet var addressLabel : UILabel!
@@ -33,6 +38,27 @@ class RestoDetailViewController: UIViewController {
     
     func initReview(){
         reviews = self.resto.reviews
+        // en fonction de la valeur du rating afficher plus ou moins d'étoiles
+        let nbStars = Int(round(self.resto.rating / 4))
+        if nbStars == 5 {
+            star5ImageView.image = UIImage(named: "fleche_pleine")
+        }
+        if nbStars >= 4 {
+            star4ImageView.image = UIImage(named: "fleche_pleine")
+        }
+        if nbStars >= 3 {
+            star3ImageView.image = UIImage(named: "fleche_pleine")
+        }
+        if nbStars >= 2 {
+            star2ImageView.image = UIImage(named: "fleche_pleine")
+        }
+        if nbStars >= 1 {
+            star1ImageView.image = UIImage(named: "fleche_pleine")
+        }
+        
+        
+        
+        
        /* reviews.append(Review(rating: 2, restoId: 1))
         reviews.append(Review(rating: 3, restoId: 1))
         reviews[0].nickname = "Penible22"
@@ -74,7 +100,7 @@ class RestoDetailViewController: UIViewController {
         } else {
             restoImageView.image = UIImage(named: "icon152")
         }
-        ratingLabel.text = "\(resto.rating)"
+        // ratingLabel.text = "\(resto.rating)"
         // priceRange
         priceLabel.text = textePriceRange(resto.priceRange)
         //if let myPriceRange = resto.priceRange {
@@ -93,6 +119,7 @@ class RestoDetailViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        initReview()
         reviewTableView.reloadData()
     }
 
@@ -149,8 +176,9 @@ extension RestoDetailViewController : UITableViewDelegate, UITableViewDataSource
                 cell.textDescriptionLabel.text = "pas de commentaire"
             }
             
-            cell.rateLabel.text = "4 étoiles"
+            cell.rateLabel.text = " \(Int(round(reviews[indexPath.row].rating))) / 20"
             return cell
+            
         }
         
         

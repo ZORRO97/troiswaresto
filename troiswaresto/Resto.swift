@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreLocation
+import Firebase
 
 class Resto {
     
@@ -18,8 +19,13 @@ class Resto {
     var description : String?
     var reviews = [Review]()
     var rating: Double {
-        return 0
+        var total = 0.0
+        for review in self.reviews {
+            total += review.rating
+        }
+        return total / Double(self.reviews.count)
     }
+    
     var address: String {
         return "120 rue des poissonniers 75018 PARIS"
     }
@@ -29,14 +35,26 @@ class Resto {
         return 0
     }
     
-    
+    func addReviewInCloud(review: Review){
+        // ajouter une review dans firebase
+        // let firebaseUrl = "https://sweltering-heat-2058.firebaseio.com"
+        let ref = Firebase(url: firebaseUrl)
+        let refResto = ref.childByAppendingPath("data/resto/\(restoId)/reviews")
+        let refReview = refResto.childByAutoId()
+       
+        refReview.childByAppendingPath("rating").setValue(review.rating)
+        if let myDescription = review.description {
+            refReview.childByAppendingPath("description").setValue(myDescription)
+        }
+        if let myNickname = review.nickname {
+            refReview.childByAppendingPath("nickname").setValue(myNickname)
+        }
+    }
     
     init (restoId:String,name: String, position: CLLocation){
         self.restoId = restoId
         self.name = name
         self.position = position
-        
-        
     }
     
 }

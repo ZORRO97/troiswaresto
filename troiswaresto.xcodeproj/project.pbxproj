@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CEA6B5E072D012C1C9604A40 /* Pods_troiswaresto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C510BA9868243A1B98C0E1 /* Pods_troiswaresto.framework */; };
+		FC8548DF1CD2211F000B94EE /* NewRestoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8548DE1CD2211F000B94EE /* NewRestoViewController.swift */; };
 		FCCBF0001CCE481F00C0B7DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBEFFF1CCE481F00C0B7DB /* AppDelegate.swift */; };
 		FCCBF0021CCE481F00C0B7DB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF0011CCE481F00C0B7DB /* MainViewController.swift */; };
 		FCCBF0051CCE481F00C0B7DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCBF0031CCE481F00C0B7DB /* Main.storyboard */; };
@@ -51,6 +52,7 @@
 		39C510BA9868243A1B98C0E1 /* Pods_troiswaresto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_troiswaresto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4630B55084E73804815DA6E2 /* Pods-troiswaresto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-troiswaresto.release.xcconfig"; path = "Pods/Target Support Files/Pods-troiswaresto/Pods-troiswaresto.release.xcconfig"; sourceTree = "<group>"; };
 		944A6DF970D8BC0F6AD6091D /* Pods-troiswaresto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-troiswaresto.debug.xcconfig"; path = "Pods/Target Support Files/Pods-troiswaresto/Pods-troiswaresto.debug.xcconfig"; sourceTree = "<group>"; };
+		FC8548DE1CD2211F000B94EE /* NewRestoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRestoViewController.swift; sourceTree = "<group>"; };
 		FCCBEFFC1CCE481F00C0B7DB /* troiswaresto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = troiswaresto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCCBEFFF1CCE481F00C0B7DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCCBF0011CCE481F00C0B7DB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			children = (
 				FCCBF0411CCF809700C0B7DB /* CommentViewController.swift */,
 				FCCBF0431CCF928600C0B7DB /* MapViewController.swift */,
+				FC8548DE1CD2211F000B94EE /* NewRestoViewController.swift */,
 				FCCBF03B1CCE5D1B00C0B7DB /* RestoDetailViewController.swift */,
 				FCCBF0011CCE481F00C0B7DB /* MainViewController.swift */,
 				FCCBF0371CCE4D8C00C0B7DB /* RestosViewController.swift */,
@@ -408,6 +411,7 @@
 				FCCBF0381CCE4D8C00C0B7DB /* RestosViewController.swift in Sources */,
 				FCCBF0421CCF809700C0B7DB /* CommentViewController.swift in Sources */,
 				FCCBF03A1CCE58ED00C0B7DB /* RestoCell.swift in Sources */,
+				FC8548DF1CD2211F000B94EE /* NewRestoViewController.swift in Sources */,
 				FCCBF0401CCF795A00C0B7DB /* AddCell.swift in Sources */,
 				FCCBF0361CCE4A1500C0B7DB /* Review.swift in Sources */,
 			);
