@@ -115,7 +115,25 @@ extension RestosViewController : UITableViewDelegate, UITableViewDataSource {
          cell.priceRangeLabel.text = "Inconnu"
         }
         cell.priceRangeLabel.text = textePriceRange(restos[indexPath.row].priceRange)
-        cell.rateLabel.text = "4 étoiles"
+        // gérer l'affichage des étoiles
+        if let myRating = self.restos[indexPath.row].rating {
+        let nbStars = Int(round(myRating / 4))
+        if nbStars == 5 {
+            cell.star5ImageView.image = UIImage(named: "fleche_pleine")
+        }
+        if nbStars >= 4 {
+            cell.star4ImageView.image = UIImage(named: "fleche_pleine")
+        }
+        if nbStars >= 3 {
+            cell.star3ImageView.image = UIImage(named: "fleche_pleine")
+        }
+        if nbStars >= 2 {
+            cell.star2ImageView.image = UIImage(named: "fleche_pleine")
+        }
+        if nbStars >= 1 {
+            cell.star1ImageView.image = UIImage(named: "fleche_pleine")
+        }
+        }
         
         return cell
     }

@@ -39,23 +39,24 @@ class RestoDetailViewController: UIViewController {
     func initReview(){
         reviews = self.resto.reviews
         // en fonction de la valeur du rating afficher plus ou moins d'étoiles
-        let nbStars = Int(round(self.resto.rating / 4))
-        if nbStars == 5 {
-            star5ImageView.image = UIImage(named: "fleche_pleine")
+        if let myRating = self.resto.rating {
+            let nbStars = Int(round(myRating / 4))
+            if nbStars == 5 {
+                star5ImageView.image = UIImage(named: "fleche_pleine")
+            }
+            if nbStars >= 4 {
+                star4ImageView.image = UIImage(named: "fleche_pleine")
+            }
+            if nbStars >= 3 {
+                star3ImageView.image = UIImage(named: "fleche_pleine")
+            }
+            if nbStars >= 2 {
+                star2ImageView.image = UIImage(named: "fleche_pleine")
+            }
+            if nbStars >= 1 {
+                star1ImageView.image = UIImage(named: "fleche_pleine")
+            }
         }
-        if nbStars >= 4 {
-            star4ImageView.image = UIImage(named: "fleche_pleine")
-        }
-        if nbStars >= 3 {
-            star3ImageView.image = UIImage(named: "fleche_pleine")
-        }
-        if nbStars >= 2 {
-            star2ImageView.image = UIImage(named: "fleche_pleine")
-        }
-        if nbStars >= 1 {
-            star1ImageView.image = UIImage(named: "fleche_pleine")
-        }
-        
         
         
         

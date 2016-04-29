@@ -18,6 +18,8 @@ class CommentViewController: UIViewController {
     @IBOutlet var ratingLabel: UILabel!
    
     
+    
+    
     var resto: Resto!
     var reviews:[Review]!
     var restoDetailViewController: RestoDetailViewController!
@@ -36,9 +38,19 @@ class CommentViewController: UIViewController {
             myReview.description = myText
             myReview.nickname = "critique xxx"
             resto.reviews.append(myReview)
-            resto.addReviewInCloud(myReview)
+            resto.addReviewInCloud(myReview) { (success) in
+                
+                    NSLog("closure réussie")
+                let alert = UIAlertController(title: "INFORMATION", message: "Votre review a été enregistré ?", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                
+                self.presentViewController(alert, animated: true, completion: nil)
+            
+            }
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
+        // self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func valueSliderChanged(){
@@ -46,7 +58,14 @@ class CommentViewController: UIViewController {
         ratingLabel.text = "Note \(note)/20"
     }
     
-    func afficheResto(){
+    // action effectuée lorsqu'on tape en dehors de la zone de saisie
+    @IBAction func viewTaped(){
+        commentTextField.resignFirstResponder() //
+        
+    }
+    
+    
+       func afficheResto(){
         nameLabel.text = resto.name
         restoImageView.image = UIImage(named: "icon152")
         nicknameLabel.text = "Avis de critiqueN"
@@ -57,6 +76,8 @@ class CommentViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+    
         afficheResto()
     }
 
@@ -75,5 +96,28 @@ class CommentViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - Remonter la vue avec le clavier
+    
+     func textFieldDidBeginEditing(textField: UITextField) {
+     animateViewMoving(true, moveValue: 100)
+     }
+     
+     func textFieldDidEndEditing(textField: UITextField) {
+     animateViewMoving(false, moveValue: 100)
+     }
+     
+     func animateViewMoving (up:Bool, moveValue :CGFloat){
+     let movementDuration:NSTimeInterval = 0.3
+     let movement:CGFloat = ( up ? -moveValue : moveValue)
+     UIView.beginAnimations( "animateView", context: nil)
+     UIView.setAnimationBeginsFromCurrentState(true)
+     UIView.setAnimationDuration(movementDuration )
+     self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+     UIView.commitAnimations()
+     }
+    
+    // MARK: -
+
 
 }
