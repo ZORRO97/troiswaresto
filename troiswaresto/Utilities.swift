@@ -151,3 +151,52 @@ func getImageFromURL(fileURL: String)->UIImage? {
 // TODO: ajouter le champ "fileUrl" dans Firebase
 // récupérer cette valeur dans la requête Alamofire
 // utiliser cette fonction pour récupérer de façon synchrone l'image du restaurant et l'ajouter à l'objet resto
+
+
+// MARK: - simpleAlert
+// version de base
+func simpleAlert(title: String, message: String, controller : UIViewController){
+    
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+    
+    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil) )
+    
+    controller.presentViewController(alert, animated: true, completion: nil)
+    
+}
+
+// alert avec closure en paramètre pour l'action positive
+func simpleAlert(title: String, message: String, controller : UIViewController, positiveAction :()->()){
+    
+    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    
+    alert.addAction(UIAlertAction(title: "Activer", style: .Default) { (UIAlertAction) in
+        positiveAction()
+        })
+    // alert.addAction(UIAlertAction(title: "Annuler", style: .Default, handler: nil ))
+    controller.presentViewController(alert, animated: true, completion: nil)
+    
+}
+
+// alert avec closures en paramètres positiveAction et negativeAction
+func simpleAlert(title: String, message: String, controller : UIViewController, positiveAction :()->(), negativeAction:()->()){
+    
+    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    
+    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (UIAlertAction) in
+        positiveAction()
+        })
+    
+    alert.addAction(UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Default) { (UIAlertAction) in
+        negativeAction()
+        })
+    
+    controller.presentViewController(alert, animated: true, completion: nil)
+    
+}
+
+func affichageDouble(number : Double)-> String {
+    return String(round(number*100)/100)
+}
+
+

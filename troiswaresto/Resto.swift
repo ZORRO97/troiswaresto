@@ -30,14 +30,25 @@ class Resto {
         }
     }
     
-    var address: String {
-        return "120 rue des poissonniers 75018 PARIS"
-    }
+    var address: String?
     var image: UIImage?
     var priceRange : PriceRange?
-    var distance: CLLocationDistance {
-        return 0
+    var distance: CLLocationDistance?
+    
+    func setDistanceToUser(userPosition : CLLocation) {
+        
+        self.distance = userPosition.distanceFromLocation(self.position)
     }
+    
+    /*
+    func getReview(completionhandler: ()->([Review])){
+        let ref = Firebase(url: firebaseUrl)
+        let refRestoReviews = ref.childByAppendingPath("data/resto/\(restoId)/reviews")
+       // let snapshot = refRestoReviews. as! FDataSnapshot
+        let myReviews = hydrateReviews(snapshot)
+        completionhandler(reviews : myReviews)
+    }
+    */
     
     func addReviewInCloud(review: Review, completionhandler: (success: Bool) ->()){
         // ajouter une review dans firebase
@@ -51,7 +62,7 @@ class Resto {
         
         refReview.childByAppendingPath("rating").setValue(review.rating, withCompletionBlock:{
             (error: NSError!, myref: Firebase!) -> () in
-            completionhandler(success: true)
+                completionhandler(success: (error != nil) ? false : true)
         })
         
         if let myDescription = review.description {
@@ -63,7 +74,7 @@ class Resto {
     }
     
     
-    init (restoId:String,name: String, position: CLLocation){
+    init (restoId:String, name: String, position: CLLocation){
         self.restoId = restoId
         self.name = name
         self.position = position
@@ -80,12 +91,29 @@ enum PriceRange: Int {
 }
 
 
-// TO DO
+// TODO:
 // enregistrer un resto ds firebase
-func addRestoInCloud(resto: Resto){
-    let ref = Firebase(url: firebaseUrl)
-    let refRestos = ref.childByAppendingPath("data/resto")
-    let refResto = refRestos.childByAutoId()
-    refResto.childByAppendingPath("name").setValue(resto.name)
+func addRestoInCloud(name: String, address : String, position : CLLocation, description : String?, priceRange : PriceRange,image: UIImage?, completionhandler : (success : Bool)->() ){
+    let refRestos = Firebase(url: "\(firebaseUrl)/data/resto")
     
+    let refResto = refRestos.childByAutoId()   // créer un nouvel id resto
+    var myDico = ["name" : name, "address": address]
+    if let myDescription = description {
+       
+        myDico["description"] = myDescription
+    }
+    refResto.setValue(myDico)
+    
+   
+    refResto.childByAppendingPath("position").setValue(["lat": position.coordinate.latitude, "long" :position.coordinate.longitude])
+    
+    
+    refResto.childByAppendingPath("priceRange").setValue(priceRange.rawValue)
+    
+    // TODO: gérer les images dans Firebase
+    //if let myFileURL = fileURL {
+    //    refResto.childByAppendingPath("fileURL").setValue(myFileURL)
+    //}
+    completionhandler(success: true)
+
 }

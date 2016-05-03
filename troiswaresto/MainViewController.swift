@@ -28,12 +28,23 @@ class MainViewController: UIViewController {
         myRootRef.observeEventType(.Value, withBlock: {
             snapshot in
             logDebug("back from request")
-            logDebug("\(snapshot.key) -> \(snapshot.value)")
+            // logDebug("\(snapshot.key) -> \(snapshot.value)")
         })
         
-        getRestosInfo() { (allRestos) in
+        getRestosInfoFirebase() { (allRestos: [Resto])->() in
+            logDebug("fin fonction getRestosInfo")
             self.restos = allRestos
         }
+        
+        /*
+        getRestosInfo() { (allRestos) in
+            self.restos = allRestos
+            simpleAlert("Information", message: "Les restos sont chargés", controller: self,
+                positiveAction: {()->() in NSLog("positive action")},
+                negativeAction: {()->() in NSLog("négative action")}
+            )
+        }
+ */
     }
     
 

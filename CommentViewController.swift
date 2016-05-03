@@ -37,21 +37,30 @@ class CommentViewController: UIViewController {
             let myReview = Review(rating: Double(Int(ratingSlider.value)))
             myReview.description = myText
             myReview.nickname = "critique xxx"
-            resto.reviews.append(myReview)
-            resto.addReviewInCloud(myReview) { (success) in
-                
-                    NSLog("closure réussie")
-                let alert = UIAlertController(title: "INFORMATION", message: "Votre review a été enregistré ?", preferredStyle: UIAlertControllerStyle.Alert)
-                
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                
-                self.presentViewController(alert, animated: true, completion: nil)
             
-            }
+            simpleAlert("Confirmation", message: "Voulez vous valider cet avis ?", controller: self,
+                        positiveAction: { _  in
+                            self.resto.addReviewInCloud(myReview) { (success) in
+                                
+                                if success {
+                                    simpleAlert("INFORMATION", message: "Votre review a été enregistré", controller: self,
+                                        positiveAction: {() in
+                                            self.resto.reviews.append(myReview)
+                                            self.dismissViewControllerAnimated(true, completion: nil)
+                                    })
+                                } else {
+                                    simpleAlert("ALERTE", message: "Probleme de connexion avec la base de données", controller: self)
+                                }
+                                
+                            }
+                            
+                },
+                        negativeAction: {()->() in self.dismissViewControllerAnimated(true, completion: nil)}
+            )
+            
         }
-        // self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     
     @IBAction func valueSliderChanged(){
         let note = Int(ratingSlider.value)

@@ -13,9 +13,13 @@ import MapKit
 class MapViewController: UIViewController {
     
     @IBOutlet var mapView : MKMapView!
+    @IBOutlet var addressLabel: UILabel?
+    @IBOutlet var addRestoButton: UIButton?
     
     var allRestos: [Resto]!
     var selectedResto: Resto?
+    var screenType : ScreenType!
+    var selectedPosition: CLLocation!
     
     var locationManager =  CLLocationManager()
     let regionRadius: CLLocationDistance = 450
@@ -36,14 +40,24 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func addRestoPressed(){
-        print("bouton add resto pressed")
-        let alert = UIAlertController(title: "Nouveau resto", message: "Voulez vous ajouter un nouveau resto ?", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Ajouter", style: UIAlertActionStyle.Default) { (UIAlertAction) in
-            self.performSegueWithIdentifier("tonewresto", sender: self) })
-            
-        alert.addAction(UIAlertAction(title: "Annuler", style: .Default, handler: nil))
+        simpleAlert("nouveau resto", message: "Voulez vous ajouter un nouveau resto ?", controller: self,
+                    positiveAction: { ()->() in
+                        self.performSegueWithIdentifier("toformnewresto", sender: self)
+            }, negativeAction: {})
         
-        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    // maj du label indiquant l'adresse choisie en fonction de la position
+    func updateAddressLabel() {
+        logDebug("update address label")
+        let centerCoordinates = mapView.centerCoordinate
+        
+        let location = CLLocation(latitude: centerCoordinates.latitude, longitude: centerCoordinates.longitude)
+        selectedPosition = location
+        
+        getAdressFromLocation(location) {(address) in
+            self.addressLabel?.text = address
+        }
     }
     
     // ajouter les pins pour une liste de stations
@@ -51,16 +65,8 @@ class MapViewController: UIViewController {
         // mapView.removeAnnotations(mapView.annotations)
         let mapCenterPosition = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
         
-        print(" les restos")
         for resto in restos {
             if (mapCenterPosition.distanceFromLocation(resto.position) <= regionRadius * 2) {
-               /* if (stationsIds.indexOf(station.numberStation) != nil) {
-                    addPin(resto, pinType: .FavoriteResto)
-                } else {
-                    addPin(resto,pinType: .StandardResto)
-                }
-                 */
-                print("resto à afficher \(resto.name)")
                 addPin(resto, pinType: .FavoriteResto)
             } else {
                 addPin(resto, pinType: .StandardResto)
@@ -80,19 +86,26 @@ class MapViewController: UIViewController {
             let mydestination : NewRestoViewController = segue.destinationViewController as! NewRestoViewController
             mydestination.restos = allRestos
         }
+        if segue.identifier == "toformnewresto" {
+            let mydestination : NewRestoViewController = segue.destinationViewController as! NewRestoViewController
+            mydestination.address = addressLabel!.text!
+            mydestination.position = selectedPosition
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        selectedPosition = CLLocation(latitude: 48.893931, longitude: 2.354374)
         if selectedResto != nil {
             self.centerMapOnLocation(selectedResto!.position)
         } else {
-           // self.centerMapOnLocation(CLLocation(latitude: 48.853, longitude: 2.35))
-            self.centerMapOnLocation(allRestos[0].position)
+           self.centerMapOnLocation(CLLocation(latitude: 48.893931, longitude: 2.354374))
+           // self.centerMapOnLocation(allRestos[0].position)
         }
         self.showUserLocation()
+        updateAddressLabel()
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,6 +125,15 @@ class MapViewController: UIViewController {
     */
     
     // MARK: - LocationManager
+    
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        // pour supprimer les annotations
+        
+        displayPins(allRestos)
+        updateAddressLabel()
+        // print("appel mapview")
+    }
+
     func showUserLocation() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -125,13 +147,13 @@ class MapViewController: UIViewController {
         NSLog("did update location")
         if manager.location != nil {
             locationManager.stopUpdatingLocation()
+            
             logDebug("launching request")
-            
-            
+            for resto in allRestos {
+                resto.setDistanceToUser(manager.location!)
+            }
         }
     }
-    
-    
     
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
@@ -148,12 +170,6 @@ class MapViewController: UIViewController {
 }
 
 extension MapViewController : MKMapViewDelegate, CLLocationManagerDelegate {
-    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        // pour supprimer les annotations
-        
-        displayPins(allRestos)
-        print("appel mapview")
-    }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -181,7 +197,10 @@ extension MapViewController : MKMapViewDelegate, CLLocationManagerDelegate {
                 let myButton = UIButton(type: .DetailDisclosure)
               //  myButton.frame = CGRect(x: 20, y: 20, width: 20, height: 20)
               //  myButton.setBackgroundImage(UIImage(named: imageRight), forState: .Normal)
-                view.rightCalloutAccessoryView = myButton
+                
+                if screenType != ScreenType.AddResto {
+                    view.rightCalloutAccessoryView = myButton
+                }
                 
               //  view.leftCalloutAccessoryView = UIImageView(image: annotation.image)
                 

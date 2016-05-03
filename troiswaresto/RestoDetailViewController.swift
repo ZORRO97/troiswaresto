@@ -82,6 +82,7 @@ class RestoDetailViewController: UIViewController {
             mydestination.selectedResto = resto
             
             mydestination.allRestos = restos
+            mydestination.screenType = ScreenType.OneResto
            // mydestination.restoDetailViewController = self        
         }
     }
@@ -107,8 +108,14 @@ class RestoDetailViewController: UIViewController {
         //if let myPriceRange = resto.priceRange {
         //    priceLabel.text = "\(myPriceRange)"
         //}
-        distanceLabel.text = "\(resto.distance) m"
-        addressLabel.text = resto.address
+        if let myDistance = resto.distance {
+            distanceLabel.text = "\(affichageDouble(myDistance)) m"
+        }
+        if let myAddress = resto.address {
+            addressLabel.text = myAddress
+        } else {
+            addressLabel.text = "Adresse non remplie"
+        }
         
         if let myDescription = resto.description {
             descriptionTextView.text = myDescription

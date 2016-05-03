@@ -10,12 +10,13 @@ import Foundation
 import MapKit
 import Alamofire
 import SwiftyJSON
+import Firebase
 
 
 enum ScreenType {
-    case Home
-    case Work
-    case Geoloc
+    case AddResto
+    case AllRestos
+    case OneResto
 }
 
 enum PinType {
@@ -150,14 +151,85 @@ func getRestosInfo(completionHandler: (allRestos :[Resto])->()){
     NSLog("fonction getRestosInfo terminée")
 }
 
+func getRestosInfoFirebase (completion:(restos : [Resto])->Void)  {
+    //  logDebug("launch resto request")
+    
+    
+    logDebug("début de getRestosInfo")
+    
+    let restosRef = Firebase(url:"\(firebaseUrl)/data/resto")
+ //   restosRef.observeSingleEventOfType(.Value, withBlock: {
+    restosRef.observeEventType(.Value, withBlock: {
+        snapshot in
+        var output = [Resto]()
+        //  logDebug("\(snapshot)")
+        
+        for item in snapshot.children.allObjects as! [FDataSnapshot] {
+            
+            if let name = item.value.objectForKey("name") as? String,
+            let myPosition = item.value.objectForKey("position") as? [String : Double]
+             {
+                logDebug("name=\(name) position \(myPosition) for key=\(item.key)")
+                if let myLatitude = myPosition["lat"], let myLongitude = myPosition["long"] {
+                    let myResto = Resto(restoId: item.key, name: name, position: CLLocation(latitude: CLLocationDegrees(myLatitude), longitude: CLLocationDegrees(myLongitude)))
+                    if let myDescription = item.value.objectForKey("description") as? String {
+                        myResto.description = myDescription
+                    }
+                    if let myPriceRange = item.value.objectForKey("priceRange") as? Int {
+                        myResto.priceRange = PriceRange(rawValue: myPriceRange)
+                    }
+                    if let myFileUrl = item.value.objectForKey("fileURL") as? String {
+                        myResto.image = getImageFromURL(myFileUrl)
+                    }
+                    
+                    if let myAdress = item.value.objectForKey("address") as? String {
+                        myResto.address = myAdress
+                    }
+                    
+                    if let myReviews = item.childSnapshotForPath("reviews") {
+                        myResto.reviews = hydrateReviews(myReviews)
+                    }
+                    output.append(myResto)
+                }
+            } else {
+                logDebug("nom non accessible")
+            }
+            
+        }
+        completion(restos: output)
+        
+    })
+    
+}
+
+func hydrateReviews(reviewsSnapshot : FDataSnapshot)->[Review] {
+    var mesReviews = [Review]()
+    for item in reviewsSnapshot.children.allObjects as! [FDataSnapshot] {
+        if let myRating = item.value.objectForKey("rating") as? Double {
+            
+            
+            let myReview = Review(rating: myRating)
+            if let myDescription = item.value.objectForKey("description") as? String {
+                myReview.description = myDescription
+            }
+            if let myNickname =  item.value.objectForKey("nickname") as? String {
+                myReview.nickname = myNickname
+            }
+            mesReviews.append(myReview)
+        }
+
+    }
+    return mesReviews
+}
+
 func textePriceRange(priceRange: PriceRange?)->String {
     
     var output:String
     if let myPriceRange = priceRange {
         switch myPriceRange {
-            case .Cheap : output = "Bon Marché"
-            case .Normal : output = "Normal"
-            case .Expensive : output = "très cher"
+            case .Cheap : output = "€"
+            case .Normal : output = "€€"
+            case .Expensive : output = "€€€"
         }
     } else {
         output = "Inconnu"
@@ -165,3 +237,26 @@ func textePriceRange(priceRange: PriceRange?)->String {
     return output
 }
 
+func getAdressFromLocation (location : CLLocation, completion:(String)->Void ) {
+    CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
+        var output = ""
+        if (error != nil) {
+            logError("Reverse geocoder failed with error" + error!.localizedDescription)
+            output = "error"
+        } else {
+            logDebug("retour geocoder")
+            if placemarks!.count > 0 {
+                let pm = placemarks![0] as CLPlacemark
+                if pm.thoroughfare != nil && pm.subThoroughfare != nil {
+                    output =  pm.subThoroughfare! + " " + pm.thoroughfare!
+                } else {
+                    output = ""
+                }
+            } else {
+                output = "error"
+            }
+        }
+        logDebug("output = \(output)")
+        completion(output)
+    })
+}

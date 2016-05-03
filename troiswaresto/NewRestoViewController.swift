@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
 
 class NewRestoViewController: UIViewController {
     
     @IBOutlet var titleLabel : UILabel!
+    @IBOutlet var addressLabel: UILabel!
     @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var descriptionTextField: UITextField!
+    @IBOutlet var descriptionTextView: UITextView!
     @IBOutlet var cheapButton: UIButton!
     @IBOutlet var normalButton: UIButton!
     @IBOutlet var expensiveButton: UIButton!
@@ -21,12 +23,15 @@ class NewRestoViewController: UIViewController {
     
     var restos: [Resto]!
     var newResto : Resto!
+    var address: String = ""
+    var position : CLLocation!
+    var priceRange : PriceRange = .Normal
     
     // action effectuée lorsqu'on tape en dehors de la zone de saisie
     @IBAction func viewTaped(){
     
         nameTextField.resignFirstResponder()
-        descriptionTextField.resignFirstResponder()
+        descriptionTextView.resignFirstResponder()
         
     }
     
@@ -40,24 +45,45 @@ class NewRestoViewController: UIViewController {
     
     @IBAction func saveRestoValidate(){
         NSLog("on va le sauver ce resto")
+        NSLog("tentative de sauvegarde pour nom \(nameTextField.text) description  \(descriptionTextView.text) adresse \(address) priceRange \(priceRange) position \(position)")
+        
+        addRestoInCloud(nameTextField.text!, address: address, position: position, description: descriptionTextView.text, priceRange: priceRange, image: nil, completionhandler: { success in
+            NSLog("on a enregistré this fucking resto")
+        })
     }
+    
+    
     
     @IBAction func starPricerangePressed(sender: AnyObject){
         switch sender.tag {
         case 0 : print("resto cheap")
-            //cheapButton.setBackgroundImage(UIImage. , forState: .Focused)
-                // UIControlState.Focused
-        
-
+        cheapButton.selected = true
+        normalButton.selected = false
+        expensiveButton.selected = false
+        priceRange = .Cheap
             
         case 1 : print("resto normal")
+        cheapButton.selected = false
+        normalButton.selected = true
+        expensiveButton.selected = false
+        priceRange = .Normal
+            
         case 2 : print("resto expensive")
+        cheapButton.selected = false
+        normalButton.selected = false
+        expensiveButton.selected = true
+        priceRange = .Expensive
+            
         default: break
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        descriptionTextView.text = ""
+        addressLabel.text = address
+        normalButton.selected = true
+        
 
         // Do any additional setup after loading the view.
     }

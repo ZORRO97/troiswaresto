@@ -13,13 +13,38 @@ import CoreLocation
 class RestosViewController: UIViewController {
     
     @IBOutlet var myTableView:UITableView!
+    @IBOutlet var segmentedControl: UISegmentedControl!
     
     var restos = [Resto]()
     // var myResto: Resto!
+    var allRestos = [Resto]() // test 2e tableau
     
     @IBAction func backButtonPressed() {
         self.dismissViewControllerAnimated(true, completion: nil)
         
+    }
+    
+    @IBAction func segmentedControlSelected(sender: AnyObject){
+        
+        switch segmentedControl.selectedSegmentIndex {
+        case 0 :
+            NSLog("tri distance")
+            restos = restos.sort { $0.distance < $1.distance}
+        case 1 :
+            NSLog("tri note")
+            restos = restos.sort { $0.rating > $1.rating }
+        case 2 :
+            NSLog("tri prix")
+            restos = restos.sort { $0.priceRange?.rawValue < $1.priceRange?.rawValue }
+            
+        default:
+            NSLog("autres cas pour \(segmentedControl.selectedSegmentIndex)")
+            break
+        }
+        for resto in self.restos {
+            NSLog("rating de \(resto.name) note \(resto.rating) ..")
+        }
+         myTableView.reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -28,9 +53,14 @@ class RestosViewController: UIViewController {
             mydestination.resto = restos[myTableView.indexPathForSelectedRow!.row]
             mydestination.restos = restos
         }
-        if segue.identifier == "tomap" {
+        if segue.identifier == "tomap" ||  segue.identifier == "toaddrestomap"  {
             let myDestination : MapViewController = segue.destinationViewController as! MapViewController
             myDestination.allRestos = restos
+            if segue.identifier == "tomap" {
+                myDestination.screenType = ScreenType.AllRestos
+            } else {
+                myDestination.screenType = ScreenType.AddResto
+            }
         }
     }
     
@@ -101,12 +131,14 @@ extension RestosViewController : UITableViewDelegate, UITableViewDataSource {
         } else {
         cell.cellImageView.image = UIImage(named: "icon120")
         }
-        cell.distanceLabel.text = "\(restos[indexPath.row].distance)"
+        if let myDistance = restos[indexPath.row].distance {
+        cell.distanceLabel.text = "\(affichageDouble(myDistance))"
+        }
         if let myPriceRange = restos[indexPath.row].priceRange {
             switch myPriceRange {
-            case .Cheap : cell.priceRangeLabel.text = "Bon Marché"
-            case .Normal : cell.priceRangeLabel.text = "Normal"
-            case .Expensive : cell.priceRangeLabel.text = "très cher"
+            case .Cheap : cell.priceRangeLabel.text = "€"
+            case .Normal : cell.priceRangeLabel.text = "€€"
+            case .Expensive : cell.priceRangeLabel.text = "€€€"
                 
             }
         } else {
@@ -117,22 +149,32 @@ extension RestosViewController : UITableViewDelegate, UITableViewDataSource {
         cell.priceRangeLabel.text = textePriceRange(restos[indexPath.row].priceRange)
         // gérer l'affichage des étoiles
         if let myRating = self.restos[indexPath.row].rating {
-        let nbStars = Int(round(myRating / 4))
-        if nbStars == 5 {
-            cell.star5ImageView.image = UIImage(named: "fleche_pleine")
-        }
-        if nbStars >= 4 {
-            cell.star4ImageView.image = UIImage(named: "fleche_pleine")
-        }
-        if nbStars >= 3 {
-            cell.star3ImageView.image = UIImage(named: "fleche_pleine")
-        }
-        if nbStars >= 2 {
-            cell.star2ImageView.image = UIImage(named: "fleche_pleine")
-        }
-        if nbStars >= 1 {
-            cell.star1ImageView.image = UIImage(named: "fleche_pleine")
-        }
+            let nbStars = Int(round(myRating / 4))
+            if nbStars == 5 {
+                cell.star5ImageView.image = UIImage(named: "fleche_pleine")
+            } else {
+                cell.star5ImageView.image = UIImage(named: "fleche_creuse")
+            }
+            if nbStars >= 4 {
+                cell.star4ImageView.image = UIImage(named: "fleche_pleine")
+            } else {
+                cell.star4ImageView.image = UIImage(named: "fleche_creuse")
+            }
+            if nbStars >= 3 {
+                cell.star3ImageView.image = UIImage(named: "fleche_pleine")
+            } else {
+                cell.star3ImageView.image = UIImage(named: "fleche_creuse")
+            }
+            if nbStars >= 2 {
+                cell.star2ImageView.image = UIImage(named: "fleche_pleine")
+            } else {
+                cell.star2ImageView.image = UIImage(named: "fleche_creuse")
+            }
+            if nbStars >= 1 {
+                cell.star1ImageView.image = UIImage(named: "fleche_pleine")
+            } else {
+                cell.star1ImageView.image = UIImage(named: "fleche_creuse")
+            }
         }
         
         return cell
