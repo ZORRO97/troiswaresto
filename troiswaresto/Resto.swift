@@ -111,9 +111,19 @@ func addRestoInCloud(name: String, address : String, position : CLLocation, desc
     refResto.childByAppendingPath("priceRange").setValue(priceRange.rawValue)
     
     // TODO: gérer les images dans Firebase
-    //if let myFileURL = fileURL {
-    //    refResto.childByAppendingPath("fileURL").setValue(myFileURL)
-    //}
-    completionhandler(success: true)
+    
+    
+    
+    if let myImage = image {
+            logWarning("lancement récupération images")
+            uploadImageToFirebase(myImage) {(imageId) in
+                logWarning("sauve id image \(imageId)")
+            refResto.childByAppendingPath("imageId").setValue(imageId)
+                completionhandler(success: true)
+        }
+    } else {
+        completionhandler(success : false)
+    }
+    
 
 }

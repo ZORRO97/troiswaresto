@@ -11,6 +11,8 @@ import Firebase
 
 class MainViewController: UIViewController {
     
+    @IBOutlet var testImageView : UIImageView!
+    
     var restos = [Resto]()
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -35,6 +37,21 @@ class MainViewController: UIViewController {
             logDebug("fin fonction getRestosInfo")
             self.restos = allRestos
         }
+        
+        // image de test avec une pretty woman
+        let myImage = getImageFromURL("https://pixabay.com/static/uploads/photo/2016/03/23/08/15/beautiful-1274345__340.jpg")
+        let imageData: NSData = UIImagePNGRepresentation(myImage!)!
+        
+        uploadDataToFirebase(imageData,
+                             completion: {(imageId) in
+                                getImageDataFromFirebase(imageId!, completionHandler:
+                                    {(data) in
+                                        let myImage = UIImage(data: data! ,scale:1.0)
+                                        self.testImageView.image = myImage
+                                    }
+                                )
+        })
+        
         
         /*
         getRestosInfo() { (allRestos) in

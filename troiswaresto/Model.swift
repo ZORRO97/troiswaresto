@@ -169,7 +169,7 @@ func getRestosInfoFirebase (completion:(restos : [Resto])->Void)  {
             if let name = item.value.objectForKey("name") as? String,
             let myPosition = item.value.objectForKey("position") as? [String : Double]
              {
-                logDebug("name=\(name) position \(myPosition) for key=\(item.key)")
+                // logDebug("name=\(name) position \(myPosition) for key=\(item.key) ")
                 if let myLatitude = myPosition["lat"], let myLongitude = myPosition["long"] {
                     let myResto = Resto(restoId: item.key, name: name, position: CLLocation(latitude: CLLocationDegrees(myLatitude), longitude: CLLocationDegrees(myLongitude)))
                     if let myDescription = item.value.objectForKey("description") as? String {
@@ -178,17 +178,25 @@ func getRestosInfoFirebase (completion:(restos : [Resto])->Void)  {
                     if let myPriceRange = item.value.objectForKey("priceRange") as? Int {
                         myResto.priceRange = PriceRange(rawValue: myPriceRange)
                     }
-                    if let myFileUrl = item.value.objectForKey("fileURL") as? String {
-                        myResto.image = getImageFromURL(myFileUrl)
-                    }
+                    //if let myFileUrl = item.value.objectForKey("fileURL") as? String {
+                    //    myResto.image = getImageFromURL(myFileUrl)
+                    //}
                     
                     if let myAdress = item.value.objectForKey("address") as? String {
                         myResto.address = myAdress
                     }
                     
+                    if let myImageId = item.value.objectForKey("imageId")  as? String {
+                        getUIImageFromImageId(myImageId){ (imageUI) in
+                            myResto.image = imageUI
+                            NSLog("image chargée \(myImageId)")
+                        }
+                    }
+                    
                     if let myReviews = item.childSnapshotForPath("reviews") {
                         myResto.reviews = hydrateReviews(myReviews)
                     }
+                    
                     output.append(myResto)
                 }
             } else {
@@ -258,5 +266,107 @@ func getAdressFromLocation (location : CLLocation, completion:(String)->Void ) {
         }
         logDebug("output = \(output)")
         completion(output)
+    })
+}
+
+//Pour convertir de la data en UIImage
+// let myImage = UIImage(data:myData ,scale:1.0)
+
+//Pour convertir une UIImage en Data
+//Google is your friend
+
+//et les deux fonctions pour écrire et lire de la NSData dans Firebase
+//à mettre dans Model.swift
+
+// http://richardbakare.com/thursday-tech-tip-firebase-images/
+func uploadDataToFirebase(myData : NSData, completion: (imageId : String?)->Void ) {
+    let imageString = myData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+    
+    let myRef = Firebase(url:firebaseUrl).childByAppendingPath("data/images").childByAutoId()
+    
+    myRef.setValue(["imagedata" : imageString], withCompletionBlock: {(error, ref) in
+        
+        if error == nil {
+            completion(imageId: myRef.key)
+        } else {
+            completion(imageId: nil)
+        }
+    })
+}
+
+/*
+func uploadImageToFirebase(myImage : UIImage, completion: (imageId : String?)->Void ) {
+    
+    let imageData: NSData = UIImagePNGRepresentation(myImage)!
+    let imageString = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+    
+    let myRef = Firebase(url:firebaseUrl).childByAppendingPath("data/images").childByAutoId()
+    
+    myRef.setValue(["imagedata" : imageString], withCompletionBlock: {(error, ref) in
+        
+        if error == nil {
+            completion(imageId: myRef.key)
+        } else {
+            completion(imageId: nil)
+        }
+    })
+}
+*/
+
+func uploadImageToFirebase(image: UIImage, completion: (imageId : String?)->Void ) {
+    
+    if let myData: NSData = UIImageJPEGRepresentation(image, 0.6) {
+        let imageString = myData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+        let myRef = Firebase(url:firebaseUrl).childByAppendingPath("data/images").childByAutoId()
+        
+        //TODO: faire un test ici pour calculer la taille en octets de imageString et vérifier moins de 10 Mo
+        myRef.setValue(["imagedata" : imageString], withCompletionBlock: {(error, ref) in
+            
+            if error == nil {
+                completion(imageId: myRef.key)
+            } else {
+                logError("error to save image in Firebase:\(error.description)")
+                completion(imageId: nil)
+            }
+        })
+    } else {
+        completion(imageId: nil)
+        logError("error to save image in Firebase, data not good")
+    }
+}
+
+
+func getImageDataFromFirebase(imageId : String, completionHandler:(data : NSData?)->Void ) {
+    let myRef = Firebase(url:firebaseUrl).childByAppendingPath("data/images/\(imageId)")
+    
+    myRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if let myString = snapshot.value.objectForKey("imagedata") as? String {
+            if let data = NSData(base64EncodedString: myString, options: NSDataBase64DecodingOptions(rawValue: 0)) {
+                
+                completionHandler(data: data)
+            } else {
+                completionHandler(data: nil)
+            }
+        }
+    })
+}
+
+func getUIImageFromImageId(imageId : String, completionHandler : (imageUI: UIImage?)->Void){
+    
+    let myRef = Firebase(url:firebaseUrl).childByAppendingPath("data/images/\(imageId)")
+    
+    myRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if let myString = snapshot.value.objectForKey("imagedata") as? String {
+            if let data = NSData(base64EncodedString: myString, options: NSDataBase64DecodingOptions(rawValue: 0)) {
+                if let myImage = UIImage(data: data ,scale:1.0) {
+                completionHandler(imageUI: myImage)
+                } else {
+                    completionHandler(imageUI: nil)
+                }
+                
+            } else {
+                completionHandler(imageUI: nil)
+            }
+        }
     })
 }

@@ -126,11 +126,13 @@ extension RestosViewController : UITableViewDelegate, UITableViewDataSource {
         // la variable indexpath.row indique la ligne selectionnée
         // on accède aux IBOutlet de la cellule avec par exemple : cell.name =
         cell.nameLabel.text  = restos[indexPath.row].name
+        
         if let myImage = restos[indexPath.row].image {
             cell.cellImageView.image = myImage
         } else {
         cell.cellImageView.image = UIImage(named: "icon120")
         }
+                
         if let myDistance = restos[indexPath.row].distance {
         cell.distanceLabel.text = "\(affichageDouble(myDistance))"
         }
@@ -175,6 +177,12 @@ extension RestosViewController : UITableViewDelegate, UITableViewDataSource {
             } else {
                 cell.star1ImageView.image = UIImage(named: "fleche_creuse")
             }
+        } else {
+            cell.star1ImageView.image = UIImage(named: "fleche_creuse")
+            cell.star2ImageView.image = UIImage(named: "fleche_creuse")
+            cell.star3ImageView.image = UIImage(named: "fleche_creuse")
+            cell.star4ImageView.image = UIImage(named: "fleche_creuse")
+            cell.star5ImageView.image = UIImage(named: "fleche_creuse")
         }
         
         return cell

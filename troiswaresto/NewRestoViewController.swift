@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreLocation
+import MobileCoreServices
 
-class NewRestoViewController: UIViewController {
+class NewRestoViewController: UIViewController , UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet var titleLabel : UILabel!
     @IBOutlet var addressLabel: UILabel!
@@ -20,6 +21,7 @@ class NewRestoViewController: UIViewController {
     @IBOutlet var expensiveButton: UIButton!
     @IBOutlet var saveButton: UIButton!
     @IBOutlet var cancelButton: UIButton!
+    @IBOutlet var restoImageView: UIImageView!
     
     var restos: [Resto]!
     var newResto : Resto!
@@ -41,6 +43,23 @@ class NewRestoViewController: UIViewController {
     
     @IBAction func takePhotoPressed(){
         print("photo à prendre")
+        let alert = UIAlertController(title: "Menu photo", message: "", preferredStyle: .ActionSheet )
+        
+        alert.addAction(UIAlertAction(title: "Prendre une photo", style: .Default) { (UIAlertAction) in
+            NSLog("action positive")
+            self.useCameraWithResto()
+            })
+        
+        alert.addAction(UIAlertAction(title: "Camera Roll", style: .Default) { (UIAlertAction) in
+                self.useCameraRoll()
+            })
+        
+        alert.addAction(UIAlertAction(title: "Annuler", style: .Destructive) { (UIAlertAction) in
+            NSLog("action négative")
+            })
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    
     }
     
     @IBAction func saveRestoValidate(){
@@ -78,6 +97,68 @@ class NewRestoViewController: UIViewController {
         }
     }
     
+    
+    func useCameraWithResto() {
+        
+        if UIImagePickerController.isSourceTypeAvailable(
+            UIImagePickerControllerSourceType.Camera) {
+            
+            let imagePicker = UIImagePickerController()
+            
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+            imagePicker.mediaTypes = [kUTTypeImage as String]
+            imagePicker.allowsEditing = false
+            
+            self.presentViewController(imagePicker, animated: true,
+                                       completion: nil)
+            //  newMedia = true
+        }
+    }
+    
+    // récupère une image dans le cameraRoll
+    func useCameraRoll() {
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum) {
+            let imagePicker = UIImagePickerController()
+            
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            imagePicker.mediaTypes = [kUTTypeImage as String]
+            imagePicker.allowsEditing = false
+            self.presentViewController(imagePicker, animated: true,
+                                       completion: nil)
+            // newMedia = false
+        }
+    }
+    
+    // recupère une photo via le pickerController
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let mediaType = info[UIImagePickerControllerMediaType] as! String
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        if mediaType == (kUTTypeImage as String) {
+            
+            // on récupère ici l'image
+            let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+            
+            restoImageView.image = image
+            
+            //on pourrait faire d'autres choses
+            
+            /*
+             if (newMedia == true) {
+             UIImageWriteToSavedPhotosAlbum(image, self,
+             "image:didFinishSavingWithError:contextInfo:", nil)
+             } else if mediaType == (kUTTypeMovie as String) {
+             // Code to support video here
+             }
+             */
+            
+        }
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         descriptionTextView.text = ""
