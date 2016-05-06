@@ -1,0 +1,129 @@
+
+/* Class = "UISegmentedControl"; 1XH-Zw-obc.segmentTitles[0] = "Distance"; ObjectID = "1XH-Zw-obc"; */
+"1XH-Zw-obc.segmentTitles[0]" = "Distance";
+
+/* Class = "UISegmentedControl"; 1XH-Zw-obc.segmentTitles[1] = "Note"; ObjectID = "1XH-Zw-obc"; */
+"1XH-Zw-obc.segmentTitles[1]" = "Note";
+
+/* Class = "UISegmentedControl"; 1XH-Zw-obc.segmentTitles[2] = "Prix"; ObjectID = "1XH-Zw-obc"; */
+"1XH-Zw-obc.segmentTitles[2]" = "Prix";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "2w0-qF-RDA"; */
+"2w0-qF-RDA.text" = "Label";
+
+/* Class = "UILabel"; text = "Avis de critique"; ObjectID = "4lB-e3-mi0"; */
+"4lB-e3-mi0.text" = "Avis de critique";
+
+/* Class = "UIButton"; normalTitle = "< Retour"; ObjectID = "64X-jt-7i6"; */
+"64X-jt-7i6.normalTitle" = "< Retour";
+
+/* Class = "UIButton"; normalTitle = "€€€"; ObjectID = "7f7-ay-8RI"; */
+"7f7-ay-8RI.normalTitle" = "€€€";
+
+/* Class = "UILabel"; text = "Nouveau resto"; ObjectID = "977-r2-j1C"; */
+"977-r2-j1C.text" = "Nouveau resto";
+
+/* Class = "UIButton"; normalTitle = "€"; ObjectID = "At6-pr-lnk"; */
+"At6-pr-lnk.normalTitle" = "€";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "Crz-T3-P3h"; */
+"Crz-T3-P3h.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UIButton"; normalTitle = "€€"; ObjectID = "F0K-HB-L8H"; */
+"F0K-HB-L8H.normalTitle" = "€€";
+
+/* Class = "UIButton"; normalTitle = "photo"; ObjectID = "GdW-fI-re8"; */
+"GdW-fI-re8.normalTitle" = "photo";
+
+/* Class = "UILabel"; text = "Etoiles"; ObjectID = "He5-iw-nUg"; */
+"He5-iw-nUg.text" = "Etoiles";
+
+/* Class = "UILabel"; text = "distance"; ObjectID = "JfP-BC-iIG"; */
+"JfP-BC-iIG.text" = "distance";
+
+/* Class = "UIButton"; normalTitle = "Restos"; ObjectID = "Jfl-YS-no4"; */
+"Jfl-YS-no4.normalTitle" = "Restos";
+
+/* Class = "UILabel"; text = "42 rue René Clair"; ObjectID = "K3r-8E-t4S"; */
+"K3r-8E-t4S.text" = "42 rue René Clair";
+
+/* Class = "UIButton"; normalTitle = "Social"; ObjectID = "Kcp-Un-IMs"; */
+"Kcp-Un-IMs.normalTitle" = "Social";
+
+/* Class = "UIButton"; normalTitle = "+"; ObjectID = "Kpx-Zg-5pR"; */
+"Kpx-Zg-5pR.normalTitle" = "+";
+
+/* Class = "UILabel"; text = "Nom resto"; ObjectID = "L7r-sk-SMi"; */
+"L7r-sk-SMi.text" = "Nom resto";
+
+/* Class = "UITextField"; placeholder = "Nom"; ObjectID = "LQY-fe-fRc"; */
+"LQY-fe-fRc.placeholder" = "Nom";
+
+/* Class = "UILabel"; text = "Note 10/20"; ObjectID = "NY6-RG-cfw"; */
+"NY6-RG-cfw.text" = "Note 10/20";
+
+/* Class = "UILabel"; text = "Avis"; ObjectID = "OmF-Xs-bio"; */
+"OmF-Xs-bio.text" = "Avis";
+
+/* Class = "UILabel"; text = "€€€"; ObjectID = "R5z-gm-hnQ"; */
+"R5z-gm-hnQ.text" = "€€€";
+
+/* Class = "UILabel"; text = "Adresse"; ObjectID = "UrL-zH-GQZ"; */
+"UrL-zH-GQZ.text" = "Adresse";
+
+/* Class = "UIButton"; normalTitle = "< Back"; ObjectID = "Vb8-3y-R08"; */
+"Vb8-3y-R08.normalTitle" = "< Back";
+
+/* Class = "UIButton"; normalTitle = "< Back"; ObjectID = "Wke-cK-YGB"; */
+"Wke-cK-YGB.normalTitle" = "< Back";
+
+/* Class = "UIButton"; normalTitle = "cancel"; ObjectID = "aHg-DQ-xNp"; */
+"aHg-DQ-xNp.normalTitle" = "cancel";
+
+/* Class = "UILabel"; text = "nom"; ObjectID = "cIf-MQ-ldG"; */
+"cIf-MQ-ldG.text" = "nom";
+
+/* Class = "UIButton"; normalTitle = "Valider"; ObjectID = "eha-pT-JCV"; */
+"eha-pT-JCV.normalTitle" = "Valider";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "hYh-sB-OZQ"; */
+"hYh-sB-OZQ.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UIButton"; normalTitle = "save"; ObjectID = "l28-Q6-LCd"; */
+"l28-Q6-LCd.normalTitle" = "save";
+
+/* Class = "UILabel"; text = "3W Restos"; ObjectID = "mF4-ie-abR"; */
+"mF4-ie-abR.text" = "3W Restos";
+
+/* Class = "UILabel"; text = "Titre"; ObjectID = "mRf-8P-8ta"; */
+"mRf-8P-8ta.text" = "Titre";
+
+/* Class = "UIButton"; normalTitle = "< Retour"; ObjectID = "nMW-mf-eCI"; */
+"nMW-mf-eCI.normalTitle" = "< Retour";
+
+/* Class = "UIButton"; normalTitle = "< Back"; ObjectID = "o7m-Iy-Afu"; */
+"o7m-Iy-Afu.normalTitle" = "< Back";
+
+/* Class = "UIButton"; normalTitle = "Carte"; ObjectID = "p4U-5O-q2m"; */
+"p4U-5O-q2m.normalTitle" = "Carte";
+
+/* Class = "UILabel"; text = "Le Serbe"; ObjectID = "rpK-Re-2qe"; */
+"rpK-Re-2qe.text" = "Le Serbe";
+
+/* Class = "UIButton"; normalTitle = "< Back"; ObjectID = "sHy-ld-PQa"; */
+"sHy-ld-PQa.normalTitle" = "< Back";
+
+/* Class = "UIButton"; normalTitle = "Chat room"; ObjectID = "vNp-n8-gzh"; */
+"vNp-n8-gzh.normalTitle" = "Chat room";
+
+/* Class = "UILabel"; text = "150m"; ObjectID = "wgt-eG-NKL"; */
+"wgt-eG-NKL.text" = "150m";
+
+/* Class = "UIButton"; normalTitle = "Carte"; ObjectID = "wtl-dy-fdh"; */
+"wtl-dy-fdh.normalTitle" = "Carte";
+
+/* Class = "UILabel"; text = "catégorie €"; ObjectID = "ys2-fR-s1T"; */
+"ys2-fR-s1T.text" = "catégorie €";
+
+/* Class = "UITextField"; placeholder = "Entrez votre critique"; ObjectID = "yxY-4M-7Mf"; */
+"yxY-4M-7Mf.placeholder" = "Entrez votre critique";

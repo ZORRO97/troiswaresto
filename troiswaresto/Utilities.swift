@@ -199,4 +199,18 @@ func affichageDouble(number : Double)-> String {
     return String(round(number*100)/100)
 }
 
+extension String {
+    var translate :String {
+        return NSLocalizedString(self, comment: "")
+    }
+    
+    
+    func trimBefore(needle: String)->String {
+        var output = self
+        if let position = self.rangeOfString(needle) {
+            output.removeRange(self.startIndex..<position.endIndex)
+        }
+        return output
+    }
+}
 

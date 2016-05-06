@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  troiswaresto
+
+  Created by etudiant-11 on 06/05/2016.
+  Copyright © 2016 francois. All rights reserved.
+*/
+ "main.hello" = "hello";
+"main.back" = "< Back";
+"main.save" = "Save";
+"main.cancel" = "Cancel";
+
+"addresto.addressLabel" = "address";
+"addresto.nameLabel" = "name";
+"addresto.pictureMenu" = "Photo choices";
+"addresto.takePicture" = "take a photo";
+"main.cameraRoll" = "Camera Roll";

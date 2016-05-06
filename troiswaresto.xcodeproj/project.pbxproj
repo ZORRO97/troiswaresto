@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		CEA6B5E072D012C1C9604A40 /* Pods_troiswaresto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C510BA9868243A1B98C0E1 /* Pods_troiswaresto.framework */; };
+		FC74BA5F1CDC965300D9037B /* imageen.png in Resources */ = {isa = PBXBuildFile; fileRef = FC74BA611CDC965300D9037B /* imageen.png */; };
+		FC74BA651CDC9BB400D9037B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC74BA671CDC9BB400D9037B /* Localizable.strings */; };
+		FC74BA6A1CDCC2E900D9037B /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74BA691CDCC2E900D9037B /* WelcomeViewController.swift */; };
+		FC74BA6C1CDCC3AD00D9037B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74BA6B1CDCC3AD00D9037B /* LoginViewController.swift */; };
+		FC74BA6E1CDCC3C100D9037B /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74BA6D1CDCC3C100D9037B /* CreateAccountViewController.swift */; };
+		FC74BA701CDCE74000D9037B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74BA6F1CDCE74000D9037B /* User.swift */; };
+		FC74BA721CDCEAF200D9037B /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74BA711CDCEAF100D9037B /* FirebaseHelper.swift */; };
 		FC8548DF1CD2211F000B94EE /* NewRestoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8548DE1CD2211F000B94EE /* NewRestoViewController.swift */; };
 		FCCBF0001CCE481F00C0B7DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBEFFF1CCE481F00C0B7DB /* AppDelegate.swift */; };
 		FCCBF0021CCE481F00C0B7DB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF0011CCE481F00C0B7DB /* MainViewController.swift */; };
@@ -52,6 +59,17 @@
 		39C510BA9868243A1B98C0E1 /* Pods_troiswaresto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_troiswaresto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4630B55084E73804815DA6E2 /* Pods-troiswaresto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-troiswaresto.release.xcconfig"; path = "Pods/Target Support Files/Pods-troiswaresto/Pods-troiswaresto.release.xcconfig"; sourceTree = "<group>"; };
 		944A6DF970D8BC0F6AD6091D /* Pods-troiswaresto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-troiswaresto.debug.xcconfig"; path = "Pods/Target Support Files/Pods-troiswaresto/Pods-troiswaresto.debug.xcconfig"; sourceTree = "<group>"; };
+		FC74BA581CDC952900D9037B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		FC74BA591CDC952900D9037B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		FC74BA601CDC965300D9037B /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/imageen.png; sourceTree = "<group>"; };
+		FC74BA621CDC965700D9037B /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = fr.lproj/imageen.png; sourceTree = "<group>"; };
+		FC74BA661CDC9BB400D9037B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FC74BA681CDC9BBD00D9037B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FC74BA691CDCC2E900D9037B /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeViewController.swift; path = ../WelcomeViewController.swift; sourceTree = "<group>"; };
+		FC74BA6B1CDCC3AD00D9037B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
+		FC74BA6D1CDCC3C100D9037B /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateAccountViewController.swift; path = ../CreateAccountViewController.swift; sourceTree = "<group>"; };
+		FC74BA6F1CDCE74000D9037B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FC74BA711CDCEAF100D9037B /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		FC8548DE1CD2211F000B94EE /* NewRestoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRestoViewController.swift; sourceTree = "<group>"; };
 		FCCBEFFC1CCE481F00C0B7DB /* troiswaresto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = troiswaresto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCCBEFFF1CCE481F00C0B7DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +142,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FC74BA5A1CDC953400D9037B /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				FC74BA611CDC965300D9037B /* imageen.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		FCCBEFF31CCE481F00C0B7DB = {
 			isa = PBXGroup;
 			children = (
@@ -149,11 +175,14 @@
 		FCCBEFFE1CCE481F00C0B7DB /* troiswaresto */ = {
 			isa = PBXGroup;
 			children = (
+				FC74BA5A1CDC953400D9037B /* Images */,
 				FCCBF04A1CD1038B00C0B7DB /* Cell */,
 				FCCBF0491CD102FA00C0B7DB /* Controllers */,
 				FCCBF0321CCE48BA00C0B7DB /* Model */,
 				FCCBEFFF1CCE481F00C0B7DB /* AppDelegate.swift */,
 				FCCBF0031CCE481F00C0B7DB /* Main.storyboard */,
+				FC74BA6F1CDCE74000D9037B /* User.swift */,
+				FC74BA711CDCEAF100D9037B /* FirebaseHelper.swift */,
 				FCCBF0091CCE481F00C0B7DB /* Assets.xcassets */,
 				FCCBF00B1CCE481F00C0B7DB /* LaunchScreen.storyboard */,
 				FCCBF00E1CCE481F00C0B7DB /* Info.plist */,
@@ -196,11 +225,15 @@
 			isa = PBXGroup;
 			children = (
 				FCCBF0411CCF809700C0B7DB /* CommentViewController.swift */,
+				FC74BA6D1CDCC3C100D9037B /* CreateAccountViewController.swift */,
+				FC74BA671CDC9BB400D9037B /* Localizable.strings */,
+				FC74BA6B1CDCC3AD00D9037B /* LoginViewController.swift */,
+				FCCBF0011CCE481F00C0B7DB /* MainViewController.swift */,
 				FCCBF0431CCF928600C0B7DB /* MapViewController.swift */,
 				FC8548DE1CD2211F000B94EE /* NewRestoViewController.swift */,
 				FCCBF03B1CCE5D1B00C0B7DB /* RestoDetailViewController.swift */,
-				FCCBF0011CCE481F00C0B7DB /* MainViewController.swift */,
 				FCCBF0371CCE4D8C00C0B7DB /* RestosViewController.swift */,
+				FC74BA691CDCC2E900D9037B /* WelcomeViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -305,6 +338,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = FCCBEFF31CCE481F00C0B7DB;
 			productRefGroup = FCCBEFFD1CCE481F00C0B7DB /* Products */;
@@ -323,7 +357,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC74BA651CDC9BB400D9037B /* Localizable.strings in Resources */,
 				FCCBF00D1CCE481F00C0B7DB /* LaunchScreen.storyboard in Resources */,
+				FC74BA5F1CDC965300D9037B /* imageen.png in Resources */,
 				FCCBF00A1CCE481F00C0B7DB /* Assets.xcassets in Resources */,
 				FCCBF0051CCE481F00C0B7DB /* Main.storyboard in Resources */,
 			);
@@ -398,15 +434,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC74BA6C1CDCC3AD00D9037B /* LoginViewController.swift in Sources */,
 				FCCBF0021CCE481F00C0B7DB /* MainViewController.swift in Sources */,
 				FCCBF03E1CCF5C6900C0B7DB /* ReviewCell.swift in Sources */,
 				FCCBF0081CCE481F00C0B7DB /* troiswaresto.xcdatamodeld in Sources */,
 				FCCBF03C1CCE5D1B00C0B7DB /* RestoDetailViewController.swift in Sources */,
 				FCCBF0341CCE48E000C0B7DB /* Resto.swift in Sources */,
+				FC74BA6A1CDCC2E900D9037B /* WelcomeViewController.swift in Sources */,
+				FC74BA721CDCEAF200D9037B /* FirebaseHelper.swift in Sources */,
 				FCCBF0481CD0C64000C0B7DB /* Parameters.swift in Sources */,
+				FC74BA701CDCE74000D9037B /* User.swift in Sources */,
 				FCCBF0311CCE486000C0B7DB /* Utilities.swift in Sources */,
 				FCCBF0441CCF928600C0B7DB /* MapViewController.swift in Sources */,
 				FCCBF0461CCF9AAE00C0B7DB /* Model.swift in Sources */,
+				FC74BA6E1CDCC3C100D9037B /* CreateAccountViewController.swift in Sources */,
 				FCCBF0001CCE481F00C0B7DB /* AppDelegate.swift in Sources */,
 				FCCBF0381CCE4D8C00C0B7DB /* RestosViewController.swift in Sources */,
 				FCCBF0421CCF809700C0B7DB /* CommentViewController.swift in Sources */,
@@ -449,10 +490,29 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		FC74BA611CDC965300D9037B /* imageen.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC74BA601CDC965300D9037B /* en */,
+				FC74BA621CDC965700D9037B /* fr */,
+			);
+			name = imageen.png;
+			sourceTree = "<group>";
+		};
+		FC74BA671CDC9BB400D9037B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC74BA661CDC9BB400D9037B /* en */,
+				FC74BA681CDC9BBD00D9037B /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		FCCBF0031CCE481F00C0B7DB /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				FCCBF0041CCE481F00C0B7DB /* Base */,
+				FC74BA581CDC952900D9037B /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -461,6 +521,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				FCCBF00C1CCE481F00C0B7DB /* Base */,
+				FC74BA591CDC952900D9037B /* fr */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

@@ -197,4 +197,29 @@ extension RestosViewController : UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
+    
+    // personnalisation du slide to left
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Delete") { action, index in
+            print("Delete button tapped")
+            // self.velibStations.removeAtIndex(indexPath.row)
+            simpleAlert("Suppression", message: "voulez vous supprimer ce resto ?", controller: self, positiveAction:
+                {_ in
+                    NSLog("lancement de la suppression du resto")
+                    delRestoInCloud(self.restos[indexPath.row].restoId, completionHandler: { success in
+                        if success {
+                            self.restos.removeAtIndex(indexPath.row)
+                            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                            
+                        }
+                        simpleAlert("résultat suppression", message: success ? "Réussi" : "Echec" , controller: self)
+                    })
+                    
+            })
+            
+            
+        }
+        return [delete]
+    }
 }

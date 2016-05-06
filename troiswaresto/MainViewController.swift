@@ -25,6 +25,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        /*
         let myRootRef = Firebase(url:"https://sweltering-heat-2058.firebaseio.com")
         
         myRootRef.observeEventType(.Value, withBlock: {
@@ -32,12 +33,13 @@ class MainViewController: UIViewController {
             logDebug("back from request")
             // logDebug("\(snapshot.key) -> \(snapshot.value)")
         })
+         */
         
         getRestosInfoFirebase() { (allRestos: [Resto])->() in
             logDebug("fin fonction getRestosInfo")
             self.restos = allRestos
         }
-        
+        /*
         // image de test avec une pretty woman
         let myImage = getImageFromURL("https://pixabay.com/static/uploads/photo/2016/03/23/08/15/beautiful-1274345__340.jpg")
         let imageData: NSData = UIImagePNGRepresentation(myImage!)!
@@ -51,6 +53,7 @@ class MainViewController: UIViewController {
                                     }
                                 )
         })
+        */
         
         
         /*
@@ -62,6 +65,12 @@ class MainViewController: UIViewController {
             )
         }
  */
+        
+        testImageView.image = UIImage(named: "imageen")
+        // let myString = NSLocalizedString("main.hello", comment: "pour dire bonjour")
+        // syntaxe avec l'extension
+        let myString = "main.hello".translate
+        NSLog(myString)
     }
     
 

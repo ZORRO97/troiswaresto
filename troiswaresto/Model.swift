@@ -313,9 +313,51 @@ func uploadImageToFirebase(myImage : UIImage, completion: (imageId : String?)->V
 }
 */
 
+
+// fonction pour réduire une image d'un facteur entier
+// http://nshipster.com/image-resizing/
+func reduceImage(image : UIImage, factor : Int)-> UIImage {
+    let size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(1 / CGFloat(factor), 1 / CGFloat(factor)))
+    let hasAlpha = false
+    let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+    
+    UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+    image.drawInRect(CGRect(origin: CGPointZero, size: size))
+    
+    let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    
+    return scaledImage
+}
+
+
+
+// début de la fonction
+// http://richardbakare.com/thursday-tech-tip-firebase-images/
+/* func uploadImageToFirebase(image: UIImage, completion: (imageId : String?)->Void ) {
+    
+    //reduction de la taille de l'image si elle est trop grande
+    var resizedImage = image
+    if image.size.width > 2400 {
+        logWarning("initial size=\(image.size)")
+        resizedImage = reduceImage(image, factor: 2)
+        logWarning("reduced size=\(resizedImage.size)")
+    }
+}
+ */
+
 func uploadImageToFirebase(image: UIImage, completion: (imageId : String?)->Void ) {
     
-    if let myData: NSData = UIImageJPEGRepresentation(image, 0.6) {
+    
+    //reduction de la taille de l'image si elle est trop grande
+    var resizedImage = image
+    if image.size.width > 2400 {
+        logWarning("initial size=\(image.size)")
+        resizedImage = reduceImage(image, factor: 2)
+        logWarning("reduced size=\(resizedImage.size)")
+    }
+    
+    if let myData: NSData = UIImageJPEGRepresentation(resizedImage, 0.5) {
         let imageString = myData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
         let myRef = Firebase(url:firebaseUrl).childByAppendingPath("data/images").childByAutoId()
         
@@ -334,6 +376,8 @@ func uploadImageToFirebase(image: UIImage, completion: (imageId : String?)->Void
         logError("error to save image in Firebase, data not good")
     }
 }
+
+
 
 
 func getImageDataFromFirebase(imageId : String, completionHandler:(data : NSData?)->Void ) {

@@ -127,3 +127,20 @@ func addRestoInCloud(name: String, address : String, position : CLLocation, desc
     
 
 }
+
+func delRestoInCloud(restoId: String, completionHandler : (success: Bool)->()){
+    let refResto = Firebase(url: "\(firebaseUrl)/data/resto/\(restoId)")
+    
+    
+    // trouver la référence de l'image
+   
+    refResto.observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if let myImageId = snapshot.value.objectForKey("imageId") as? String {
+            let refImage = Firebase(url: "\(firebaseUrl)/data/images/\(myImageId)")
+            refImage.removeValue()
+        }
+        refResto.removeValue()
+        // simpleAlert("Suppression", message: "resto \(restoId) supprimé", controller: viewController)
+        completionHandler(success: true)
+    })
+}

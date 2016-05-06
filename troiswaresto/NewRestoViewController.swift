@@ -29,6 +29,12 @@ class NewRestoViewController: UIViewController , UIImagePickerControllerDelegate
     var position : CLLocation!
     var priceRange : PriceRange = .Normal
     
+    func initDisplay(){
+        saveButton.setTitle("main.save".translate, forState: .Normal)
+        
+        cancelButton.setTitle("main.cancel".translate, forState: .Normal)
+    }
+    
     // action effectuée lorsqu'on tape en dehors de la zone de saisie
     @IBAction func viewTaped(){
     
@@ -43,14 +49,14 @@ class NewRestoViewController: UIViewController , UIImagePickerControllerDelegate
     
     @IBAction func takePhotoPressed(){
         print("photo à prendre")
-        let alert = UIAlertController(title: "Menu photo", message: "", preferredStyle: .ActionSheet )
+        let alert = UIAlertController(title: "addresto.pictureMenu".translate, message: "", preferredStyle: .ActionSheet )
         
-        alert.addAction(UIAlertAction(title: "Prendre une photo", style: .Default) { (UIAlertAction) in
+        alert.addAction(UIAlertAction(title: "addresto.takePicture".translate, style: .Default) { (UIAlertAction) in
             NSLog("action positive")
             self.useCameraWithResto()
             })
         
-        alert.addAction(UIAlertAction(title: "Camera Roll", style: .Default) { (UIAlertAction) in
+        alert.addAction(UIAlertAction(title: "main.cameraRoll".translate, style: .Default) { (UIAlertAction) in
                 self.useCameraRoll()
             })
         
@@ -167,7 +173,7 @@ class NewRestoViewController: UIViewController , UIImagePickerControllerDelegate
         descriptionTextView.text = ""
         addressLabel.text = address
         normalButton.selected = true
-        
+        initDisplay()
 
         // Do any additional setup after loading the view.
     }
@@ -190,11 +196,11 @@ class NewRestoViewController: UIViewController , UIImagePickerControllerDelegate
     
     // MARK: - Remonter la vue avec le clavier
     
-     @IBAction func textFieldDidBeginEditing(textField: UITextField) {
+      func textFieldDidBeginEditing(textField: UITextField) {
      animateViewMoving(true, moveValue: 100)
      }
      
-     @IBAction func textFieldDidEndEditing(textField: UITextField) {
+     func textFieldDidEndEditing(textField: UITextField) {
      animateViewMoving(false, moveValue: 100)
      }
      
