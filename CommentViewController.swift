@@ -23,10 +23,8 @@ class CommentViewController: UIViewController {
     var resto: Resto!
     var reviews:[Review]!
     var restoDetailViewController: RestoDetailViewController!
+    var user: User!
     
-    @IBAction func backButtonPressed() {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
     
     @IBAction func validReviewPressed(){
         print("on valide la nouvelle review")
@@ -36,7 +34,7 @@ class CommentViewController: UIViewController {
         if let myText = commentTextField.text {
             let myReview = Review(rating: Double(Int(ratingSlider.value)))
             myReview.description = myText
-            myReview.nickname = "critique xxx"
+            myReview.nickname = user.nickname
             
             simpleAlert("Confirmation", message: "Voulez vous valider cet avis ?", controller: self,
                         positiveAction: { _  in
@@ -46,7 +44,7 @@ class CommentViewController: UIViewController {
                                     simpleAlert("INFORMATION", message: "Votre review a été enregistré", controller: self,
                                         positiveAction: {() in
                                             self.resto.reviews.append(myReview)
-                                            self.dismissViewControllerAnimated(true, completion: nil)
+                                            self.navigationController?.popViewControllerAnimated(true)
                                     })
                                 } else {
                                     simpleAlert("ALERTE", message: "Probleme de connexion avec la base de données", controller: self)
@@ -55,7 +53,7 @@ class CommentViewController: UIViewController {
                             }
                             
                 },
-                        negativeAction: {()->() in self.dismissViewControllerAnimated(true, completion: nil)}
+                        negativeAction: {()->() in self.navigationController?.popViewControllerAnimated(true)}
             )
             
         }
@@ -77,12 +75,13 @@ class CommentViewController: UIViewController {
        func afficheResto(){
         nameLabel.text = resto.name
         restoImageView.image = UIImage(named: "icon152")
-        nicknameLabel.text = "Avis de critiqueN"
+        nicknameLabel.text = "Avis de critique \(user.nickname)"
         commentTextField.text = ""
      }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        user = getUserFromUserDefaults()
 
         // Do any additional setup after loading the view.
         

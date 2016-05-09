@@ -12,18 +12,48 @@ import Firebase
 class MainViewController: UIViewController {
     
     @IBOutlet var testImageView : UIImageView!
+    @IBOutlet var statusLabel : UILabel!
+    @IBOutlet var connectButton : UIButton!
     
     var restos = [Resto]()
+    var user : User!
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    @IBAction func connectButtonPressed(){
+        
+        if user != nil {
+            FirebaseHelper.disconnectFirebaseUser()
+
+            user = nil
+            updateUserDisplay()
+        } else {
+            logDebug("relier à la connexion")
+            self.performSegueWithIdentifier("tologin", sender: self)
+        }
+    }
+    
+    func updateUserDisplay(){
+        
+        if user != nil {
+            statusLabel.text = "connecté en tant que \(user.nickname)"
+            connectButton.setTitle("se déconnecter", forState: .Normal)
+        } else {
+            connectButton.setTitle("Connexion", forState: .Normal)
+            statusLabel.text = "anonyme"
+        }
+    }
+    
+    /*override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "torestos" {
             let myDestination : RestosViewController = segue.destinationViewController as! RestosViewController
             myDestination.restos = restos
         }
     }
+ */
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
         /*
         let myRootRef = Firebase(url:"https://sweltering-heat-2058.firebaseio.com")
@@ -35,11 +65,7 @@ class MainViewController: UIViewController {
         })
          */
         
-        getRestosInfoFirebase() { (allRestos: [Resto])->() in
-            logDebug("fin fonction getRestosInfo")
-            self.restos = allRestos
-        }
-        /*
+                /*
         // image de test avec une pretty woman
         let myImage = getImageFromURL("https://pixabay.com/static/uploads/photo/2016/03/23/08/15/beautiful-1274345__340.jpg")
         let imageData: NSData = UIImagePNGRepresentation(myImage!)!
@@ -56,15 +82,6 @@ class MainViewController: UIViewController {
         */
         
         
-        /*
-        getRestosInfo() { (allRestos) in
-            self.restos = allRestos
-            simpleAlert("Information", message: "Les restos sont chargés", controller: self,
-                positiveAction: {()->() in NSLog("positive action")},
-                negativeAction: {()->() in NSLog("négative action")}
-            )
-        }
- */
         
         testImageView.image = UIImage(named: "imageen")
         // let myString = NSLocalizedString("main.hello", comment: "pour dire bonjour")
@@ -73,7 +90,13 @@ class MainViewController: UIViewController {
         NSLog(myString)
     }
     
-
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        user = getUserFromUserDefaults()
+        updateUserDisplay()
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

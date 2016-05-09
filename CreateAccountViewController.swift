@@ -27,7 +27,7 @@ class CreateAccountViewController: UIViewController {
             FirebaseHelper.createFirebaseUser(myEmail!, password: myPassword!, nickname : myNickname!)
             
             // rediriger vers Main
-            self.performSegueWithIdentifier("tomainnewaccount", sender: self)
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     

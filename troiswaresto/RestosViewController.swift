@@ -76,7 +76,14 @@ class RestosViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // initResto()
+        getRestosInfoFirebase() { (allRestos: [Resto])->() in
+            logDebug("fin fonction getRestosInfo")
+            self.restos = allRestos
+            self.restos = self.restos.sort { $0.priceRange?.rawValue < $1.priceRange?.rawValue }
+            self.segmentedControl.selectedSegmentIndex = 2
+            self.myTableView.reloadData()
+        }
+                // initResto()
         // Do any additional setup after loading the view.
     }
     

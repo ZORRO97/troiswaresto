@@ -181,7 +181,6 @@
 				FCCBF0321CCE48BA00C0B7DB /* Model */,
 				FCCBEFFF1CCE481F00C0B7DB /* AppDelegate.swift */,
 				FCCBF0031CCE481F00C0B7DB /* Main.storyboard */,
-				FC74BA6F1CDCE74000D9037B /* User.swift */,
 				FC74BA711CDCEAF100D9037B /* FirebaseHelper.swift */,
 				FCCBF0091CCE481F00C0B7DB /* Assets.xcassets */,
 				FCCBF00B1CCE481F00C0B7DB /* LaunchScreen.storyboard */,
@@ -213,6 +212,7 @@
 		FCCBF0321CCE48BA00C0B7DB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FC74BA6F1CDCE74000D9037B /* User.swift */,
 				FCCBF0331CCE48E000C0B7DB /* Resto.swift */,
 				FCCBF0351CCE4A1500C0B7DB /* Review.swift */,
 				FCCBF0451CCF9AAE00C0B7DB /* Model.swift */,

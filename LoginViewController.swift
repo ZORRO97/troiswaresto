@@ -14,13 +14,26 @@ class LoginViewController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var okButton: UIButton!
     
+    var user: User!
+    
     @IBAction func okButtonPressed(){
         let myEmail = emailTextField.text
         let myPassword = passwordTextField.text
         if myEmail?.characters.count > 4 && myPassword?.characters.count > 3 {
             // tester si l'identification est correcte
             // si oui relier au main
-            performSegueWithIdentifier("tomainconnected", sender: self)
+            FirebaseHelper.logFirebaseUser(myEmail!, password: myPassword!, completion: {uid in
+                if uid != nil {
+                    FirebaseHelper.getFirebaseUser(uid!, completion: { user in
+                    self.user = user
+                    self.user.password = myPassword!
+                    self.user.persistUserInUserDefaults()
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    })
+                }
+            
+            })
+            
         }
     }
     
@@ -34,6 +47,15 @@ class LoginViewController: UIViewController {
     
     @IBAction func backButtonPressed(){
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+       /* if segue.identifier == "tomainconnected" {
+            let  mydestination : MainViewController = segue.destinationViewController as! MainViewController
+            // mydestination.user = user
+            
+        }
+    */
     }
 
     override func viewDidLoad() {
