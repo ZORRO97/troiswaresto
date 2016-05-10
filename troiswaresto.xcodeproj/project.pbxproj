@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		CEA6B5E072D012C1C9604A40 /* Pods_troiswaresto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C510BA9868243A1B98C0E1 /* Pods_troiswaresto.framework */; };
+		FC389AD11CE22FFC00F26A31 /* CoreDataReview+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC389ACD1CE22FFC00F26A31 /* CoreDataReview+CoreDataProperties.swift */; };
+		FC389AD21CE22FFC00F26A31 /* CoreDataReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC389ACE1CE22FFC00F26A31 /* CoreDataReview.swift */; };
+		FC389AD31CE22FFC00F26A31 /* CoreDataUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC389ACF1CE22FFC00F26A31 /* CoreDataUser+CoreDataProperties.swift */; };
+		FC389AD41CE22FFC00F26A31 /* CoreDataUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC389AD01CE22FFC00F26A31 /* CoreDataUser.swift */; };
 		FC74BA5F1CDC965300D9037B /* imageen.png in Resources */ = {isa = PBXBuildFile; fileRef = FC74BA611CDC965300D9037B /* imageen.png */; };
 		FC74BA651CDC9BB400D9037B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC74BA671CDC9BB400D9037B /* Localizable.strings */; };
 		FC74BA6A1CDCC2E900D9037B /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74BA691CDCC2E900D9037B /* WelcomeViewController.swift */; };
@@ -15,6 +19,7 @@
 		FC74BA6E1CDCC3C100D9037B /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74BA6D1CDCC3C100D9037B /* CreateAccountViewController.swift */; };
 		FC74BA701CDCE74000D9037B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74BA6F1CDCE74000D9037B /* User.swift */; };
 		FC74BA721CDCEAF200D9037B /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74BA711CDCEAF100D9037B /* FirebaseHelper.swift */; };
+		FC74BA781CE1DBE800D9037B /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74BA771CE1DBE800D9037B /* CoreDataHelper.swift */; };
 		FC8548DF1CD2211F000B94EE /* NewRestoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8548DE1CD2211F000B94EE /* NewRestoViewController.swift */; };
 		FCCBF0001CCE481F00C0B7DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBEFFF1CCE481F00C0B7DB /* AppDelegate.swift */; };
 		FCCBF0021CCE481F00C0B7DB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF0011CCE481F00C0B7DB /* MainViewController.swift */; };
@@ -59,6 +64,10 @@
 		39C510BA9868243A1B98C0E1 /* Pods_troiswaresto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_troiswaresto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4630B55084E73804815DA6E2 /* Pods-troiswaresto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-troiswaresto.release.xcconfig"; path = "Pods/Target Support Files/Pods-troiswaresto/Pods-troiswaresto.release.xcconfig"; sourceTree = "<group>"; };
 		944A6DF970D8BC0F6AD6091D /* Pods-troiswaresto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-troiswaresto.debug.xcconfig"; path = "Pods/Target Support Files/Pods-troiswaresto/Pods-troiswaresto.debug.xcconfig"; sourceTree = "<group>"; };
+		FC389ACD1CE22FFC00F26A31 /* CoreDataReview+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreDataReview+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC389ACE1CE22FFC00F26A31 /* CoreDataReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataReview.swift; sourceTree = "<group>"; };
+		FC389ACF1CE22FFC00F26A31 /* CoreDataUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreDataUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC389AD01CE22FFC00F26A31 /* CoreDataUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataUser.swift; sourceTree = "<group>"; };
 		FC74BA581CDC952900D9037B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		FC74BA591CDC952900D9037B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		FC74BA601CDC965300D9037B /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/imageen.png; sourceTree = "<group>"; };
@@ -70,6 +79,7 @@
 		FC74BA6D1CDCC3C100D9037B /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateAccountViewController.swift; path = ../CreateAccountViewController.swift; sourceTree = "<group>"; };
 		FC74BA6F1CDCE74000D9037B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FC74BA711CDCEAF100D9037B /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
+		FC74BA771CE1DBE800D9037B /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		FC8548DE1CD2211F000B94EE /* NewRestoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRestoViewController.swift; sourceTree = "<group>"; };
 		FCCBEFFC1CCE481F00C0B7DB /* troiswaresto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = troiswaresto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCCBEFFF1CCE481F00C0B7DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +152,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FC389ACC1CE22FC600F26A31 /* supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				FCCBF0301CCE486000C0B7DB /* Utilities.swift */,
+				FC389ACD1CE22FFC00F26A31 /* CoreDataReview+CoreDataProperties.swift */,
+				FC389ACE1CE22FFC00F26A31 /* CoreDataReview.swift */,
+				FC389ACF1CE22FFC00F26A31 /* CoreDataUser+CoreDataProperties.swift */,
+				FC389AD01CE22FFC00F26A31 /* CoreDataUser.swift */,
+			);
+			name = "supporting files";
+			sourceTree = "<group>";
+		};
 		FC74BA5A1CDC953400D9037B /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,18 +197,17 @@
 		FCCBEFFE1CCE481F00C0B7DB /* troiswaresto */ = {
 			isa = PBXGroup;
 			children = (
+				FCCBF0031CCE481F00C0B7DB /* Main.storyboard */,
+				FCCBF00B1CCE481F00C0B7DB /* LaunchScreen.storyboard */,
+				FCCBF0091CCE481F00C0B7DB /* Assets.xcassets */,
 				FC74BA5A1CDC953400D9037B /* Images */,
 				FCCBF04A1CD1038B00C0B7DB /* Cell */,
 				FCCBF0491CD102FA00C0B7DB /* Controllers */,
 				FCCBF0321CCE48BA00C0B7DB /* Model */,
+				FC389ACC1CE22FC600F26A31 /* supporting files */,
 				FCCBEFFF1CCE481F00C0B7DB /* AppDelegate.swift */,
-				FCCBF0031CCE481F00C0B7DB /* Main.storyboard */,
-				FC74BA711CDCEAF100D9037B /* FirebaseHelper.swift */,
-				FCCBF0091CCE481F00C0B7DB /* Assets.xcassets */,
-				FCCBF00B1CCE481F00C0B7DB /* LaunchScreen.storyboard */,
 				FCCBF00E1CCE481F00C0B7DB /* Info.plist */,
 				FCCBF0061CCE481F00C0B7DB /* troiswaresto.xcdatamodeld */,
-				FCCBF0301CCE486000C0B7DB /* Utilities.swift */,
 			);
 			path = troiswaresto;
 			sourceTree = "<group>";
@@ -217,6 +238,8 @@
 				FCCBF0351CCE4A1500C0B7DB /* Review.swift */,
 				FCCBF0451CCF9AAE00C0B7DB /* Model.swift */,
 				FCCBF0471CD0C64000C0B7DB /* Parameters.swift */,
+				FC74BA771CE1DBE800D9037B /* CoreDataHelper.swift */,
+				FC74BA711CDCEAF100D9037B /* FirebaseHelper.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -438,19 +461,24 @@
 				FCCBF0021CCE481F00C0B7DB /* MainViewController.swift in Sources */,
 				FCCBF03E1CCF5C6900C0B7DB /* ReviewCell.swift in Sources */,
 				FCCBF0081CCE481F00C0B7DB /* troiswaresto.xcdatamodeld in Sources */,
+				FC389AD21CE22FFC00F26A31 /* CoreDataReview.swift in Sources */,
 				FCCBF03C1CCE5D1B00C0B7DB /* RestoDetailViewController.swift in Sources */,
 				FCCBF0341CCE48E000C0B7DB /* Resto.swift in Sources */,
 				FC74BA6A1CDCC2E900D9037B /* WelcomeViewController.swift in Sources */,
 				FC74BA721CDCEAF200D9037B /* FirebaseHelper.swift in Sources */,
+				FC389AD11CE22FFC00F26A31 /* CoreDataReview+CoreDataProperties.swift in Sources */,
 				FCCBF0481CD0C64000C0B7DB /* Parameters.swift in Sources */,
+				FC389AD41CE22FFC00F26A31 /* CoreDataUser.swift in Sources */,
 				FC74BA701CDCE74000D9037B /* User.swift in Sources */,
 				FCCBF0311CCE486000C0B7DB /* Utilities.swift in Sources */,
 				FCCBF0441CCF928600C0B7DB /* MapViewController.swift in Sources */,
+				FC389AD31CE22FFC00F26A31 /* CoreDataUser+CoreDataProperties.swift in Sources */,
 				FCCBF0461CCF9AAE00C0B7DB /* Model.swift in Sources */,
 				FC74BA6E1CDCC3C100D9037B /* CreateAccountViewController.swift in Sources */,
 				FCCBF0001CCE481F00C0B7DB /* AppDelegate.swift in Sources */,
 				FCCBF0381CCE4D8C00C0B7DB /* RestosViewController.swift in Sources */,
 				FCCBF0421CCF809700C0B7DB /* CommentViewController.swift in Sources */,
+				FC74BA781CE1DBE800D9037B /* CoreDataHelper.swift in Sources */,
 				FCCBF03A1CCE58ED00C0B7DB /* RestoCell.swift in Sources */,
 				FC8548DF1CD2211F000B94EE /* NewRestoViewController.swift in Sources */,
 				FCCBF0401CCF795A00C0B7DB /* AddCell.swift in Sources */,

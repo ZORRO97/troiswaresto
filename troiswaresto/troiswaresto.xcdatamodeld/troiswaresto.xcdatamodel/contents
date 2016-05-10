@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15D21" minimumToolsVersion="Automatic">
+    <entity name="CoreDataReview" representedClassName=".CoreDataReview" syncable="YES">
+        <attribute name="avis" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreDataUser" inverseName="review" inverseEntity="CoreDataUser" syncable="YES"/>
+    </entity>
+    <entity name="CoreDataUser" representedClassName="CoreDataUser" syncable="YES">
+        <attribute name="email" attributeType="String" syncable="YES"/>
+        <attribute name="nickname" attributeType="String" syncable="YES"/>
+        <attribute name="password" attributeType="String" syncable="YES"/>
+        <attribute name="userId" attributeType="String" syncable="YES"/>
+        <relationship name="review" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CoreDataReview" inverseName="user" inverseEntity="CoreDataReview" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CoreDataUser" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="CoreDataReview" positionX="198" positionY="-9" width="128" height="118"/>
+    </elements>
 </model>

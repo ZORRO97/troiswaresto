@@ -17,6 +17,8 @@ class MainViewController: UIViewController {
     
     var restos = [Resto]()
     var user : User!
+    var myCoreDataUser: CoreDataUser!
+    var myCoreDataReviews = [CoreDataReview]()
     
     @IBAction func connectButtonPressed(){
         
@@ -54,37 +56,8 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         
-        // Do any additional setup after loading the view, typically from a nib.
-        /*
-        let myRootRef = Firebase(url:"https://sweltering-heat-2058.firebaseio.com")
-        
-        myRootRef.observeEventType(.Value, withBlock: {
-            snapshot in
-            logDebug("back from request")
-            // logDebug("\(snapshot.key) -> \(snapshot.value)")
-        })
-         */
-        
-                /*
-        // image de test avec une pretty woman
-        let myImage = getImageFromURL("https://pixabay.com/static/uploads/photo/2016/03/23/08/15/beautiful-1274345__340.jpg")
-        let imageData: NSData = UIImagePNGRepresentation(myImage!)!
-        
-        uploadDataToFirebase(imageData,
-                             completion: {(imageId) in
-                                getImageDataFromFirebase(imageId!, completionHandler:
-                                    {(data) in
-                                        let myImage = UIImage(data: data! ,scale:1.0)
-                                        self.testImageView.image = myImage
-                                    }
-                                )
-        })
-        */
-        
-        
-        
         testImageView.image = UIImage(named: "imageen")
-        // let myString = NSLocalizedString("main.hello", comment: "pour dire bonjour")
+        
         // syntaxe avec l'extension
         let myString = "main.hello".translate
         NSLog(myString)
@@ -92,8 +65,31 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let now = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.timeStyle = .ShortStyle
+        logDebug(dateFormatter.stringFromDate(now))
+        let abitlater = NSDate()
+        dateFormatter.stringFromDate(abitlater)
+        let toto : NSTimeInterval = abitlater.timeIntervalSinceDate(now)
+        logDebug("intervalle de temps \(toto)")
+        
+        
         user = getUserFromUserDefaults()
+        myCoreDataUser = CoreDataHelper.fetchOneUser()
         updateUserDisplay()
+        if myCoreDataUser != nil {
+        if let myReviews = myCoreDataUser.review as? Set<CoreDataReview>  {
+            for review in myReviews {
+                self.myCoreDataReviews.append(review)
+            }
+        }
+            
+        // let myCoreDataReviews = CoreDataHelper.fetchReviews()
+        logDebug("les reviews \(myCoreDataReviews)")
+        }
     }
     
     

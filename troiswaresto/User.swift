@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+import CoreData
 
 
 class User {
@@ -29,6 +31,31 @@ class User {
         NSUserDefaults.standardUserDefaults().setObject(self.userId, forKey: "userId")
     }
     
+    
+    func persistUserInCoreData()->Bool {
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        let entity = NSEntityDescription.entityForName("CoreDataUser", inManagedObjectContext: managedObjectContext)!
+        if CoreDataHelper.fetchUser(self.userId) == nil {
+            let oneCoreDataUser = CoreDataUser(entity: entity, insertIntoManagedObjectContext: managedObjectContext)
+            
+            oneCoreDataUser.email = self.email
+            oneCoreDataUser.nickname = self.nickname
+            oneCoreDataUser.password = self.password
+            oneCoreDataUser.userId = self.userId
+            
+            do {
+                try managedObjectContext.save()
+                return true
+                
+            } catch let error as NSError {
+                logError("Error to save:\(error.description)")
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
 }
 
 
@@ -44,3 +71,5 @@ func getUserFromUserDefaults()->User? {
     }
     
 }
+
+

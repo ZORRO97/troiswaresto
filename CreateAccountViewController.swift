@@ -27,7 +27,7 @@ class CreateAccountViewController: UIViewController {
             FirebaseHelper.createFirebaseUser(myEmail!, password: myPassword!, nickname : myNickname!)
             
             // rediriger vers Main
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.navigationController?.popViewControllerAnimated(true)
         }
     }
     
@@ -44,10 +44,7 @@ class CreateAccountViewController: UIViewController {
         nicknameTextField.resignFirstResponder()
     }
     
-    @IBAction func backButtonPressed(){
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

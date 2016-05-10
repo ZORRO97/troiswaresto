@@ -71,6 +71,10 @@ class Resto {
         if let myNickname = review.nickname {
             refReview.childByAppendingPath("nickname").setValue(myNickname)
         }
+        
+        if let myDate = review.date {
+            refReview.childByAppendingPath("date").setValue(myDate.absoluteDateToString)
+        }
     }
     
     

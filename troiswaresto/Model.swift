@@ -151,7 +151,7 @@ func getRestosInfo(completionHandler: (allRestos :[Resto])->()){
     NSLog("fonction getRestosInfo terminée")
 }
 
-func getRestosInfoFirebase (completion:(restos : [Resto])->Void)  {
+func getRestosInfoFirebase (tableview: UITableView, completion:(restos : [Resto])->Void)  {
     //  logDebug("launch resto request")
     
     
@@ -190,6 +190,7 @@ func getRestosInfoFirebase (completion:(restos : [Resto])->Void)  {
                         getUIImageFromImageId(myImageId){ (imageUI) in
                             myResto.image = imageUI
                             NSLog("image chargée \(myImageId)")
+                            tableview.reloadData()
                         }
                     }
                     
@@ -222,6 +223,9 @@ func hydrateReviews(reviewsSnapshot : FDataSnapshot)->[Review] {
             }
             if let myNickname =  item.value.objectForKey("nickname") as? String {
                 myReview.nickname = myNickname
+            }
+            if let myDateString = item.value.objectForKey("date") as? String {
+                myReview.date = myDateString.stringToDate
             }
             mesReviews.append(myReview)
         }
@@ -414,4 +418,6 @@ func getUIImageFromImageId(imageId : String, completionHandler : (imageUI: UIIma
         }
     })
 }
+
+
 

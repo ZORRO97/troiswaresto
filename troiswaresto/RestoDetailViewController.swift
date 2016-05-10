@@ -31,6 +31,7 @@ class RestoDetailViewController: UIViewController {
     var resto : Resto!
     var restos = [Resto]()
     var reviews = [Review]()
+    var coreUser : CoreDataUser!
     
     @IBAction func backButtonPressed(){
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -75,6 +76,7 @@ class RestoDetailViewController: UIViewController {
             mydestination.resto = resto
             mydestination.reviews = reviews
             mydestination.restoDetailViewController = self
+            mydestination.coreUser = coreUser
             
         }
         if segue.identifier == "tomapone" {
@@ -195,7 +197,13 @@ extension RestoDetailViewController : UITableViewDelegate, UITableViewDataSource
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedRow = indexPath.row
         if selectedRow == reviews.count {
-            self.performSegueWithIdentifier("addComment", sender: self)
+            if let myUser = CoreDataHelper.fetchOneUser() {
+                coreUser = myUser
+                self.performSegueWithIdentifier("addComment", sender: self)
+            } else {
+                simpleAlert("Alerte", message: "Vous devez vous connecter !!!!!", controller: self)
+            }
+            
         }
         //faire quelque chose avec selectedRow
         NSLog("Ligne sélectionnée \(selectedRow)")

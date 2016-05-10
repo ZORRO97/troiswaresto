@@ -24,6 +24,7 @@ class CommentViewController: UIViewController {
     var reviews:[Review]!
     var restoDetailViewController: RestoDetailViewController!
     var user: User!
+    var coreUser: CoreDataUser!
     
     
     @IBAction func validReviewPressed(){
@@ -34,16 +35,21 @@ class CommentViewController: UIViewController {
         if let myText = commentTextField.text {
             let myReview = Review(rating: Double(Int(ratingSlider.value)))
             myReview.description = myText
-            myReview.nickname = user.nickname
+            myReview.nickname = coreUser.nickname
+            myReview.date = NSDate()
             
             simpleAlert("Confirmation", message: "Voulez vous valider cet avis ?", controller: self,
                         positiveAction: { _  in
+                            
+                            
+                            
                             self.resto.addReviewInCloud(myReview) { (success) in
                                 
                                 if success {
                                     simpleAlert("INFORMATION", message: "Votre review a été enregistré", controller: self,
                                         positiveAction: {() in
                                             self.resto.reviews.append(myReview)
+                                            myReview.persistReviewInCoreData(self.coreUser)
                                             self.navigationController?.popViewControllerAnimated(true)
                                     })
                                 } else {
@@ -73,7 +79,7 @@ class CommentViewController: UIViewController {
     
     
        func afficheResto(){
-        nameLabel.text = resto.name
+     //   nameLabel.text = resto.name
         restoImageView.image = UIImage(named: "icon152")
         nicknameLabel.text = "Avis de critique \(user.nickname)"
         commentTextField.text = ""
@@ -108,11 +114,11 @@ class CommentViewController: UIViewController {
     // MARK: - Remonter la vue avec le clavier
     
      func textFieldDidBeginEditing(textField: UITextField) {
-     animateViewMoving(true, moveValue: 100)
+     animateViewMoving(true, moveValue: 150)
      }
      
      func textFieldDidEndEditing(textField: UITextField) {
-     animateViewMoving(false, moveValue: 100)
+     animateViewMoving(false, moveValue: 150)
      }
      
      func animateViewMoving (up:Bool, moveValue :CGFloat){

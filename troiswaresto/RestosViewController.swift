@@ -76,7 +76,7 @@ class RestosViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getRestosInfoFirebase() { (allRestos: [Resto])->() in
+        getRestosInfoFirebase(myTableView) { (allRestos: [Resto])->() in
             logDebug("fin fonction getRestosInfo")
             self.restos = allRestos
             self.restos = self.restos.sort { $0.priceRange?.rawValue < $1.priceRange?.rawValue }

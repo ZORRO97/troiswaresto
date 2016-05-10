@@ -28,7 +28,11 @@ class LoginViewController: UIViewController {
                     self.user = user
                     self.user.password = myPassword!
                     self.user.persistUserInUserDefaults()
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    
+                        
+                    self.user.persistUserInCoreData()   // persist du user dans CoreData
+                        
+                    self.navigationController?.popViewControllerAnimated(true)
                     })
                 }
             
@@ -72,11 +76,11 @@ class LoginViewController: UIViewController {
     // MARK: - Remonter la vue avec le clavier
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        animateViewMoving(true, moveValue: 150)
+        animateViewMoving(true, moveValue: 100)
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        animateViewMoving(false, moveValue: 150)
+        animateViewMoving(false, moveValue: 100)
     }
     
     func animateViewMoving (up:Bool, moveValue :CGFloat){
