@@ -24,6 +24,10 @@ class RestosViewController: UIViewController {
         
     }
     
+    @IBAction func backToRestos(sender: UIStoryboardSegue){
+        logDebug("retour aux restos")
+    }
+    
     @IBAction func segmentedControlSelected(sender: AnyObject){
         
         switch segmentedControl.selectedSegmentIndex {

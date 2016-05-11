@@ -22,9 +22,12 @@ class MainViewController: UIViewController {
     
     @IBAction func connectButtonPressed(){
         
-        if user != nil {
+        if myCoreDataUser != nil {
+            // CoreDataHelper.deleteOneUser()
+            user.removeUserInCoreData(myCoreDataUser)
             FirebaseHelper.disconnectFirebaseUser()
-
+            NSUserDefaults.resetStandardUserDefaults()
+            myCoreDataUser = nil
             user = nil
             updateUserDisplay()
         } else {
@@ -35,7 +38,7 @@ class MainViewController: UIViewController {
     
     func updateUserDisplay(){
         
-        if user != nil {
+        if myCoreDataUser != nil {
             statusLabel.text = "connecté en tant que \(user.nickname)"
             connectButton.setTitle("se déconnecter", forState: .Normal)
         } else {

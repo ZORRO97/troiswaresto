@@ -32,6 +32,7 @@ class User {
     }
     
     
+    
     func persistUserInCoreData()->Bool {
         let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let entity = NSEntityDescription.entityForName("CoreDataUser", inManagedObjectContext: managedObjectContext)!
@@ -54,6 +55,11 @@ class User {
         } else {
             return false
         }
+    }
+    
+    func removeUserInCoreData(userCoreData: CoreDataUser){
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        managedObjectContext.deleteObject(userCoreData as NSManagedObject)
     }
     
 }

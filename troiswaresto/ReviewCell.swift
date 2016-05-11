@@ -13,4 +13,5 @@ class ReviewCell : UITableViewCell {
     @IBOutlet var rateLabel: UILabel!
     @IBOutlet var textDescriptionLabel: UILabel!
     @IBOutlet var nicknameLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
 }

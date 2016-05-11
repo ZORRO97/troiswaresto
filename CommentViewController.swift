@@ -79,8 +79,13 @@ class CommentViewController: UIViewController {
     
     
        func afficheResto(){
-     //   nameLabel.text = resto.name
-        restoImageView.image = UIImage(named: "icon152")
+        nameLabel.text = resto.name
+        if let restoImage = resto.image {
+            restoImageView.image = restoImage
+        } else {
+            restoImageView.image = UIImage(named: "icon152")
+        }
+        
         nicknameLabel.text = "Avis de critique \(user.nickname)"
         commentTextField.text = ""
      }

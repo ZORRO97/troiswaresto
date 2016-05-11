@@ -85,7 +85,7 @@ class RestoDetailViewController: UIViewController {
             
             mydestination.allRestos = restos
             mydestination.screenType = ScreenType.OneResto
-           // mydestination.restoDetailViewController = self        
+                
         }
     }
 
@@ -104,12 +104,9 @@ class RestoDetailViewController: UIViewController {
         } else {
             restoImageView.image = UIImage(named: "icon152")
         }
-        // ratingLabel.text = "\(resto.rating)"
-        // priceRange
+        
         priceLabel.text = textePriceRange(resto.priceRange)
-        //if let myPriceRange = resto.priceRange {
-        //    priceLabel.text = "\(myPriceRange)"
-        //}
+        
         if let myDistance = resto.distance {
             distanceLabel.text = "\(affichageDouble(myDistance)) m"
         }
@@ -184,6 +181,11 @@ extension RestoDetailViewController : UITableViewDelegate, UITableViewDataSource
                 cell.textDescriptionLabel.text = "\(myDescription)"
             } else {
                 cell.textDescriptionLabel.text = "pas de commentaire"
+            }
+            if let myDate = reviews[indexPath.row].date {
+                cell.dateLabel.text = myDate.absoluteDateToString
+            } else {
+                cell.dateLabel.text = "pas de date"
             }
             
             cell.rateLabel.text = " \(Int(round(reviews[indexPath.row].rating))) / 20"

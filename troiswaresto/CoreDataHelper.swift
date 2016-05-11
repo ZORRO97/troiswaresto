@@ -75,6 +75,29 @@ class CoreDataHelper {
         
     }
     
+    static func deleteOneUser() {
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "CoreDataUser")
+        fetchRequest.entity = NSEntityDescription.entityForName("CoreDataUser", inManagedObjectContext: managedObjectContext)
+       
+        do {
+            let theUsers = try managedObjectContext.executeFetchRequest(fetchRequest) as! [CoreDataUser]
+            
+            if theUsers.count == 1 {
+                
+                managedObjectContext.deleteObject(theUsers[0] as NSManagedObject)
+                logDebug("object supprimé")
+            } else {
+                logDebug("pas de user à supprimer")
+            }
+            
+        } catch let error as NSError {
+            print("error to fetch  description :\(error.description)")
+            
+        }
+    }
+    
     static func existsUser(email: String)-> Bool{
         let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         

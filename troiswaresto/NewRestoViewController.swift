@@ -75,7 +75,7 @@ class NewRestoViewController: UIViewController , UIImagePickerControllerDelegate
         addRestoInCloud(nameTextField.text!, address: address, position: position, description: descriptionTextView.text, priceRange: priceRange, image: restoImageView.image , completionhandler: { success in
             logWarning("on a enregistré this fucking resto")
             simpleAlert("Enregistrement nouveau resto", message: "" , controller: self, positiveAction: { _ in
-                self.performSegueWithIdentifier("tomain", sender: self)
+                self.performSegueWithIdentifier("backToRestos", sender: self)
             })
         })
     }

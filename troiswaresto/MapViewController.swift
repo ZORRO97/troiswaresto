@@ -77,7 +77,7 @@ class MapViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "rewind" {
+        if segue.identifier == "maptodetail" {
             let mydestination : RestoDetailViewController = segue.destinationViewController as! RestoDetailViewController
             mydestination.resto = selectedResto!
             mydestination.restos = allRestos
@@ -198,7 +198,7 @@ extension MapViewController : MKMapViewDelegate, CLLocationManagerDelegate {
               //  myButton.frame = CGRect(x: 20, y: 20, width: 20, height: 20)
               //  myButton.setBackgroundImage(UIImage(named: imageRight), forState: .Normal)
                 
-                if screenType != ScreenType.AddResto {
+                if screenType == ScreenType.AllRestos {
                     view.rightCalloutAccessoryView = myButton
                 }
                 
@@ -218,7 +218,7 @@ extension MapViewController : MKMapViewDelegate, CLLocationManagerDelegate {
         print("info for ")
         selectedResto = monPin.resto
 
-       self.performSegueWithIdentifier("rewind", sender: selectedResto)
+       self.performSegueWithIdentifier("maptodetail", sender: selectedResto)
         
        // displayPins(allRestos)
     }
