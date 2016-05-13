@@ -43,8 +43,8 @@ class NewRestoViewController: UIViewController , UIImagePickerControllerDelegate
         
     }
     
-    @IBAction func backButtonPressed(){
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func backButtonPressed(){        
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func takePhotoPressed(){
@@ -63,6 +63,13 @@ class NewRestoViewController: UIViewController , UIImagePickerControllerDelegate
         alert.addAction(UIAlertAction(title: "Annuler", style: .Destructive) { (UIAlertAction) in
             NSLog("action négative")
             })
+        
+        if isIpad() {
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = restoImageView
+                popoverController.sourceRect = restoImageView.bounds
+            }
+        }
         
         self.presentViewController(alert, animated: true, completion: nil)
     
@@ -203,7 +210,15 @@ class NewRestoViewController: UIViewController , UIImagePickerControllerDelegate
      func textFieldDidEndEditing(textField: UITextField) {
      animateViewMoving(false, moveValue: 100)
      }
-     
+    
+    func textViewDidBeginEditing(textView: UITextView){
+        animateViewMoving(true, moveValue: 200)
+    }
+    
+    func textViewDidEndEditing(textView: UITextView){
+        animateViewMoving(false, moveValue: 200)
+    }
+    
      func animateViewMoving (up:Bool, moveValue :CGFloat){
      let movementDuration:NSTimeInterval = 0.3
      let movement:CGFloat = ( up ? -moveValue : moveValue)

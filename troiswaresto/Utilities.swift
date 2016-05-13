@@ -99,6 +99,11 @@ func getDevice ()-> String {//retourne le nom du modèle basé sur la hauteur
     #endif
 }
 
+func isIpad()->Bool {
+    return UIDevice.currentDevice().userInterfaceIdiom == .Pad
+}
+
+
 
 func getUserLanguage()->String {//from defined languages in localisation, "en" as default
     let displayNameString = NSLocale.preferredLanguages()[0]
@@ -196,7 +201,7 @@ func simpleAlert(title: String, message: String, controller : UIViewController, 
 }
 
 func affichageDouble(number : Double)-> String {
-    return String(round(number*100)/100)
+    return String(Int(round(number)))
 }
 
 extension String {
@@ -224,6 +229,13 @@ extension NSDate {
         formatter.timeZone = NSTimeZone(name: "UTC")
         return formatter.stringFromDate(self)
     }
+    
+    var reductDateToString : String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = NSTimeZone(name: "UTC")
+        return formatter.stringFromDate(self)
+    }
 }
 
 extension String {
@@ -235,3 +247,82 @@ extension String {
         return myDate!
     }
 }
+/*
+// NSNotification
+
+
+// à mettre à l'écouteur
+NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(notificationReceived), name: "reviewsubmitted", object: nil)
+
+// http://stackoverflow.com/questions/24049020/nsnotificationcenter-addobserver-in-swift
+func notificationReceived(notification: NSNotification) {
+    logWarning("Notification received from WelcomeViewController")
+    
+    if notification.userInfo != nil {
+        if let myRating = notification.userInfo!["rating"] as? Double {
+            logWarning("and the rating was:\(myRating)")
+        }
+        
+        if let message = notification.userInfo!["message"] as? Double {
+            logWarning("and the message was:\(message)")
+        }
+    }
+}
+
+
+
+// Pour envoyer la notification
+NSNotificationCenter.defaultCenter().postNotificationName("reviewsubmitted", object: nil, userInfo: ["rating" : myReview.rating, "message" : 998])
+
+*/
+/*
+enum ToastStyle {
+    case FromTop
+    case FromBottom
+}
+
+func makeToast(myview: UIView, message: String, offset: CGFloat, withStyle toastStyle:ToastStyle ) {
+    let height: CGFloat = 40
+    let waitingTime = 2.0
+    
+    var startPosition = CGPoint()
+    var middlePosition = CGPoint()
+    
+    switch toastStyle {
+    case .FromTop:
+        startPosition = CGPoint(x: 10, y: -height)
+        middlePosition = CGPoint(x: 10, y: offset)
+    case .FromBottom:
+        startPosition = CGPoint(x: 10, y: realScreenHeight())
+        middlePosition = CGPoint(x: 10, y: realScreenHeight() - offset - height)
+        
+    }
+    let myToastView = UIView(frame: CGRectMake(startPosition.x, startPosition.y, realScreenWidth() - 20, height) )
+    
+    myToastView.backgroundColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1)
+    
+    let myLabel = UILabel(frame: CGRectMake(2, 2, realScreenWidth() - 20 - 4, height - 4))
+    myLabel.text = message
+    myLabel.textAlignment = NSTextAlignment.Center
+    myLabel.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+    
+    myToastView.addSubview(myLabel)
+    
+    myview.addSubview(myToastView)
+    myview.bringSubviewToFront(myToastView)
+    
+    UIView.animateWithDuration(1, delay: 0, options: [], animations: {
+        myToastView.frame = CGRectMake(middlePosition.x, middlePosition.y, realScreenWidth() - 20, height)
+        }, completion: nil)
+    
+    UIView.animateWithDuration(1, delay: waitingTime, options: [], animations: {
+        myToastView.frame = CGRectMake(startPosition.x, startPosition.y, realScreenWidth() - 20, height)
+        }, completion: {(Bool) in
+            myToastView.removeFromSuperview()
+    })
+}
+
+func makeToast(myview: UIView, message: String) {
+    makeToast(myview, message: message, offset: 10, withStyle: .FromBottom)
+}
+ */

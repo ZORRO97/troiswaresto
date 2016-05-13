@@ -11,19 +11,22 @@ import UIKit
 class RestoDetailViewController: UIViewController {
     
     @IBOutlet var restoImageView: UIImageView!
+    
+    @IBOutlet var nameTitleLabel: UILabel!
+    @IBOutlet var ratingTitleLabel : UILabel!
+    @IBOutlet var priceTitleLabel : UILabel!
+    @IBOutlet var distanceTitleLabel : UILabel!
+    @IBOutlet var addressTitleLabel : UILabel!
+    
     @IBOutlet var nameLabel: UILabel!
-    // @IBOutlet var ratingLabel : UILabel!
-    @IBOutlet var star1ImageView: UIImageView!
-    @IBOutlet var star2ImageView: UIImageView!
-    @IBOutlet var star3ImageView: UIImageView!
-    @IBOutlet var star4ImageView: UIImageView!
-    @IBOutlet var star5ImageView: UIImageView!
+    @IBOutlet var ratingLabel : UILabel!
     @IBOutlet var priceLabel : UILabel!
     @IBOutlet var distanceLabel : UILabel!
     @IBOutlet var addressLabel : UILabel!
+    
     @IBOutlet var descriptionTextView : UITextView!
-    @IBOutlet var chatButton: UIButton!
-    @IBOutlet var mapButton: UIButton!
+    
+    @IBOutlet var mapBarButtonItem : UIBarButtonItem!
     
     @IBOutlet var reviewTableView: UITableView!
     
@@ -33,41 +36,17 @@ class RestoDetailViewController: UIViewController {
     var reviews = [Review]()
     var coreUser : CoreDataUser!
     
-    @IBAction func backButtonPressed(){
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
+   
     
     func initReview(){
         reviews = self.resto.reviews
-        // en fonction de la valeur du rating afficher plus ou moins d'étoiles
-        if let myRating = self.resto.rating {
-            let nbStars = Int(round(myRating / 4))
-            if nbStars == 5 {
-                star5ImageView.image = UIImage(named: "fleche_pleine")
-            }
-            if nbStars >= 4 {
-                star4ImageView.image = UIImage(named: "fleche_pleine")
-            }
-            if nbStars >= 3 {
-                star3ImageView.image = UIImage(named: "fleche_pleine")
-            }
-            if nbStars >= 2 {
-                star2ImageView.image = UIImage(named: "fleche_pleine")
-            }
-            if nbStars >= 1 {
-                star1ImageView.image = UIImage(named: "fleche_pleine")
-            }
-        }
+        /* tri de dates
+        //Pour comparer des dates
+        $0.date!.timeIntervalSinceDate($1.date!) > 0
+        //ou bien
+        $0.date!.compare($1.date!) == NSComparisonResult.OrderedDescending
+ */
         
-        
-        
-       /* reviews.append(Review(rating: 2, restoId: 1))
-        reviews.append(Review(rating: 3, restoId: 1))
-        reviews[0].nickname = "Penible22"
-        reviews[0].description = "Lamentable n'y allez pas !"
-        reviews[1].nickname = "Mecene34"
-        reviews[1].description = "Super ambiance décalée"
-    */
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -120,6 +99,13 @@ class RestoDetailViewController: UIViewController {
             descriptionTextView.text = myDescription
         } else {
             descriptionTextView.text = "à remplir"
+        }
+        
+        // en fonction de la valeur du rating afficher plus ou moins d'étoiles
+        if let myRating = self.resto.rating {
+            ratingLabel.text = "\(Int(myRating)) / 20"
+        } else {
+            ratingLabel.text = "pas d'avis"
         }
         
     }
@@ -183,9 +169,9 @@ extension RestoDetailViewController : UITableViewDelegate, UITableViewDataSource
                 cell.textDescriptionLabel.text = "pas de commentaire"
             }
             if let myDate = reviews[indexPath.row].date {
-                cell.dateLabel.text = myDate.absoluteDateToString
+                cell.dateLabel.text = myDate.reductDateToString
             } else {
-                cell.dateLabel.text = "pas de date"
+                cell.dateLabel.text = ""
             }
             
             cell.rateLabel.text = " \(Int(round(reviews[indexPath.row].rating))) / 20"
@@ -203,12 +189,16 @@ extension RestoDetailViewController : UITableViewDelegate, UITableViewDataSource
                 coreUser = myUser
                 self.performSegueWithIdentifier("addComment", sender: self)
             } else {
-                simpleAlert("Alerte", message: "Vous devez vous connecter !!!!!", controller: self)
+                simpleAlert("Vous n'êtes pas connecté !", message: "se connecter ?", controller: self, positiveAction: {
+                    _ in
+                    self.performSegueWithIdentifier("detailtologin", sender: self)
+                    }, negativeAction: {})
+                
             }
             
         }
-        //faire quelque chose avec selectedRow
-        NSLog("Ligne sélectionnée \(selectedRow)")
+        // faire quelque chose avec selectedRow
+        // NSLog("Ligne sélectionnée \(selectedRow)")
         
         
         

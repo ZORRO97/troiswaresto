@@ -59,7 +59,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         
-        testImageView.image = UIImage(named: "imageen")
+        // testImageView.image = UIImage(named: "imageen")
         
         // syntaxe avec l'extension
         let myString = "main.hello".translate

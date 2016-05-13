@@ -27,8 +27,13 @@ class CreateAccountViewController: UIViewController {
             FirebaseHelper.createFirebaseUser(myEmail!, password: myPassword!, nickname : myNickname!)
             
             // rediriger vers Main
-            self.navigationController?.popViewControllerAnimated(true)
+            self.dismissViewControllerAnimated(true, completion: nil)
+            // self.navigationController?.popViewControllerAnimated(true)
         }
+    }
+    
+    @IBAction func backButtonPressed(){
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // action effectuée lorsqu'on tape en dehors de la zone de saisie

@@ -86,7 +86,7 @@ class CommentViewController: UIViewController {
             restoImageView.image = UIImage(named: "icon152")
         }
         
-        nicknameLabel.text = "Avis de critique \(user.nickname)"
+        nicknameLabel.text = "\(user.nickname)"
         commentTextField.text = ""
      }
 

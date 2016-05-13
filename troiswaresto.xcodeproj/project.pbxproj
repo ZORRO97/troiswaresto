@@ -41,6 +41,7 @@
 		FCCBF0441CCF928600C0B7DB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF0431CCF928600C0B7DB /* MapViewController.swift */; };
 		FCCBF0461CCF9AAE00C0B7DB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF0451CCF9AAE00C0B7DB /* Model.swift */; };
 		FCCBF0481CD0C64000C0B7DB /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBF0471CD0C64000C0B7DB /* Parameters.swift */; };
+		FCEA46AA1CE4B4BA00463FB2 /* Connection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCEA46A91CE4B4BA00463FB2 /* Connection.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		39C510BA9868243A1B98C0E1 /* Pods_troiswaresto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_troiswaresto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4630B55084E73804815DA6E2 /* Pods-troiswaresto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-troiswaresto.release.xcconfig"; path = "Pods/Target Support Files/Pods-troiswaresto/Pods-troiswaresto.release.xcconfig"; sourceTree = "<group>"; };
 		944A6DF970D8BC0F6AD6091D /* Pods-troiswaresto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-troiswaresto.debug.xcconfig"; path = "Pods/Target Support Files/Pods-troiswaresto/Pods-troiswaresto.debug.xcconfig"; sourceTree = "<group>"; };
+		FC158C621CE47F6C001C1537 /* troiswaresto-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "troiswaresto-Bridging-Header.h"; sourceTree = "<group>"; };
 		FC389ACD1CE22FFC00F26A31 /* CoreDataReview+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreDataReview+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC389ACE1CE22FFC00F26A31 /* CoreDataReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataReview.swift; sourceTree = "<group>"; };
 		FC389ACF1CE22FFC00F26A31 /* CoreDataUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreDataUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		FCCBF0431CCF928600C0B7DB /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FCCBF0451CCF9AAE00C0B7DB /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		FCCBF0471CD0C64000C0B7DB /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
+		FCEA46A91CE4B4BA00463FB2 /* Connection.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Connection.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				FCCBF0031CCE481F00C0B7DB /* Main.storyboard */,
+				FCEA46A91CE4B4BA00463FB2 /* Connection.storyboard */,
 				FCCBF00B1CCE481F00C0B7DB /* LaunchScreen.storyboard */,
 				FCCBF0091CCE481F00C0B7DB /* Assets.xcassets */,
 				FC74BA5A1CDC953400D9037B /* Images */,
@@ -257,6 +261,7 @@
 				FCCBF03B1CCE5D1B00C0B7DB /* RestoDetailViewController.swift */,
 				FCCBF0371CCE4D8C00C0B7DB /* RestosViewController.swift */,
 				FC74BA691CDCC2E900D9037B /* WelcomeViewController.swift */,
+				FC158C621CE47F6C001C1537 /* troiswaresto-Bridging-Header.h */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -343,6 +348,11 @@
 					FCCBEFFB1CCE481F00C0B7DB = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = HU4UZMPT62;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					FCCBF0121CCE481F00C0B7DB = {
 						CreatedOnToolsVersion = 7.3;
@@ -383,6 +393,7 @@
 				FC74BA651CDC9BB400D9037B /* Localizable.strings in Resources */,
 				FCCBF00D1CCE481F00C0B7DB /* LaunchScreen.storyboard in Resources */,
 				FC74BA5F1CDC965300D9037B /* imageen.png in Resources */,
+				FCEA46AA1CE4B4BA00463FB2 /* Connection.storyboard in Resources */,
 				FCCBF00A1CCE481F00C0B7DB /* Assets.xcassets in Resources */,
 				FCCBF0051CCE481F00C0B7DB /* Main.storyboard in Resources */,
 			);
@@ -647,6 +658,7 @@
 			baseConfigurationReference = 944A6DF970D8BC0F6AD6091D /* Pods-troiswaresto.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = troiswaresto/Info.plist;
@@ -655,6 +667,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = fr.smallhead.troiswaresto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "troiswaresto/troiswaresto-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -663,6 +677,7 @@
 			baseConfigurationReference = 4630B55084E73804815DA6E2 /* Pods-troiswaresto.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = troiswaresto/Info.plist;
@@ -671,6 +686,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = fr.smallhead.troiswaresto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "troiswaresto/troiswaresto-Bridging-Header.h";
 			};
 			name = Release;
 		};

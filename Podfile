@@ -10,6 +10,7 @@ pod 'Alamofire','~> 3.3'
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 pod 'Flurry-iOS-SDK/FlurrySDK'
 pod 'Firebase', '>= 2.5.1'
+pod 'OneSignal'
 end
 
 target 'troiswarestoTests' do

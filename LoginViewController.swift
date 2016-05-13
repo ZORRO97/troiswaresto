@@ -31,8 +31,10 @@ class LoginViewController: UIViewController {
                     
                         
                     self.user.persistUserInCoreData()   // persist du user dans CoreData
+                     
+                    self.dismissViewControllerAnimated(true, completion: nil)
                         
-                    self.navigationController?.popViewControllerAnimated(true)
+                    // self.navigationController?.popViewControllerAnimated(true)
                     })
                 }
             

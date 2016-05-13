@@ -28,11 +28,6 @@ class MapViewController: UIViewController {
     
     
     
-    // Action pour le bouton retour
-    @IBAction func backButtonPressed(){
-        print("Button back pressed")
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
     
     @IBAction func flecheButtonPressed(){
         self.showUserLocation()
@@ -149,9 +144,7 @@ class MapViewController: UIViewController {
             locationManager.stopUpdatingLocation()
             
             logDebug("launching request")
-            for resto in allRestos {
-                resto.setDistanceToUser(manager.location!)
-            }
+            
         }
     }
     

@@ -24,8 +24,22 @@ class RestosViewController: UIViewController {
         
     }
     
-    @IBAction func backToRestos(sender: UIStoryboardSegue){
+    @IBAction func backToRestos(sender: UIStoryboardSegue){  // déclaration de l'unwind segue
         logDebug("retour aux restos")
+    }
+    
+    @IBAction func restoAddToMap(){
+        if CoreDataHelper.fetchOneUser() != nil {
+            self.performSegueWithIdentifier("toaddrestomap", sender: self)
+        } else {
+            simpleAlert("Vous n'êtes pas connecté !", message: "se connecter ?", controller: self, positiveAction: {
+                _ in
+                self.performSegueWithIdentifier("restotologin", sender: self)
+                }, negativeAction: {})
+            
+        }
+
+        
     }
     
     @IBAction func segmentedControlSelected(sender: AnyObject){
@@ -45,10 +59,7 @@ class RestosViewController: UIViewController {
             NSLog("autres cas pour \(segmentedControl.selectedSegmentIndex)")
             break
         }
-        for resto in self.restos {
-            NSLog("rating de \(resto.name) note \(resto.rating) ..")
-        }
-         myTableView.reloadData()
+        myTableView.reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -77,22 +88,40 @@ class RestosViewController: UIViewController {
     */
     }
     
+    func updateDistance() {
+        let locationManager = CLLocationManager()
+        // locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        locationManager.stopUpdatingLocation()
+        
+        logDebug("launching request")
+        for resto in restos {
+            resto.setDistanceToUser(locationManager.location!)
+        }
+        
+        
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         getRestosInfoFirebase(myTableView) { (allRestos: [Resto])->() in
             logDebug("fin fonction getRestosInfo")
             self.restos = allRestos
-            self.restos = self.restos.sort { $0.priceRange?.rawValue < $1.priceRange?.rawValue }
-            self.segmentedControl.selectedSegmentIndex = 2
+            self.updateDistance()
+            self.restos = self.restos.sort { $0.distance < $1.distance}
+            self.segmentedControl.selectedSegmentIndex = 0
             self.myTableView.reloadData()
         }
-                // initResto()
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        updateDistance()
         myTableView.reloadData()
     }
 
@@ -145,7 +174,7 @@ extension RestosViewController : UITableViewDelegate, UITableViewDataSource {
         }
                 
         if let myDistance = restos[indexPath.row].distance {
-        cell.distanceLabel.text = "\(affichageDouble(myDistance))"
+        cell.distanceLabel.text = "\(affichageDouble(myDistance)) m"
         }
         if let myPriceRange = restos[indexPath.row].priceRange {
             switch myPriceRange {
@@ -162,38 +191,9 @@ extension RestosViewController : UITableViewDelegate, UITableViewDataSource {
         cell.priceRangeLabel.text = textePriceRange(restos[indexPath.row].priceRange)
         // gérer l'affichage des étoiles
         if let myRating = self.restos[indexPath.row].rating {
-            let nbStars = Int(round(myRating / 4))
-            if nbStars == 5 {
-                cell.star5ImageView.image = UIImage(named: "fleche_pleine")
-            } else {
-                cell.star5ImageView.image = UIImage(named: "fleche_creuse")
-            }
-            if nbStars >= 4 {
-                cell.star4ImageView.image = UIImage(named: "fleche_pleine")
-            } else {
-                cell.star4ImageView.image = UIImage(named: "fleche_creuse")
-            }
-            if nbStars >= 3 {
-                cell.star3ImageView.image = UIImage(named: "fleche_pleine")
-            } else {
-                cell.star3ImageView.image = UIImage(named: "fleche_creuse")
-            }
-            if nbStars >= 2 {
-                cell.star2ImageView.image = UIImage(named: "fleche_pleine")
-            } else {
-                cell.star2ImageView.image = UIImage(named: "fleche_creuse")
-            }
-            if nbStars >= 1 {
-                cell.star1ImageView.image = UIImage(named: "fleche_pleine")
-            } else {
-                cell.star1ImageView.image = UIImage(named: "fleche_creuse")
-            }
+            cell.rateLabel.text = "\(Int(myRating)) / 20"
         } else {
-            cell.star1ImageView.image = UIImage(named: "fleche_creuse")
-            cell.star2ImageView.image = UIImage(named: "fleche_creuse")
-            cell.star3ImageView.image = UIImage(named: "fleche_creuse")
-            cell.star4ImageView.image = UIImage(named: "fleche_creuse")
-            cell.star5ImageView.image = UIImage(named: "fleche_creuse")
+            cell.rateLabel.text = "pas d'avis"
         }
         
         return cell

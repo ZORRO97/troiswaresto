@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,11 +16,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        _ = OneSignal(launchOptions: launchOptions, appId: "edc8be15-3747-4e8f-8d28-f7747a9f8170") { (message, additionalData, isActive) in
+            NSLog("OneSignal Notification opened:\nMessage: %@", message)
+            
+            if additionalData != nil {
+                NSLog("additionalData: %@", additionalData)
+                // Check for and read any custom values you added to the notification
+                // This done with the "Additonal Data" section the dashbaord.
+                // OR setting the 'data' field on our REST API.
+                if let customKey = additionalData["customKey"] as! String? {
+                    NSLog("customKey: %@", customKey)
+                    self.goToResto("bidon") // à modifier                
+                }
+            }
+        }
+        OneSignal.defaultClient().enableInAppAlertNotification(true)
+        
+        
         return true
     }
-
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -106,6 +125,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    
+    func goToResto(restoId : String) {
+        
+        let restoDetailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("restoDetail") as! RestoDetailViewController
+        
+        let resto = Resto(restoId: restoId, name: "A la bonne bouffe", position: CLLocation(latitude: 0, longitude: 0))
+        
+        restoDetailController.resto = resto
+        
+        self.window?.makeKeyAndVisible()
+        self.window?.rootViewController!.presentViewController(restoDetailController, animated: false, completion: nil)
+    }
 }
 
