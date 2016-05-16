@@ -121,8 +121,8 @@ class RestosViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        updateDistance()
-        myTableView.reloadData()
+        // updateDistance()
+        // myTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {

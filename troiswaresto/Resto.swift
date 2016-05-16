@@ -17,6 +17,7 @@ class Resto {
     var name: String
     var position : CLLocation
     var description : String?
+    
     var reviews = [Review]()
     var rating: Double? {
         if self.reviews.count != 0 {
@@ -82,6 +83,7 @@ class Resto {
         self.restoId = restoId
         self.name = name
         self.position = position
+        
     }
     
 }
@@ -101,7 +103,11 @@ func addRestoInCloud(name: String, address : String, position : CLLocation, desc
     let refRestos = Firebase(url: "\(firebaseUrl)/data/resto")
     
     let refResto = refRestos.childByAutoId()   // créer un nouvel id resto
+    
     var myDico = ["name" : name, "address": address]
+    if let myAuthor = CoreDataHelper.fetchOneUser()?.userId {
+        myDico["author"] = myAuthor
+    }
     if let myDescription = description {
        
         myDico["description"] = myDescription
