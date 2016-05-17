@@ -85,6 +85,7 @@ class MapViewController: UIViewController {
             let mydestination : NewRestoViewController = segue.destinationViewController as! NewRestoViewController
             mydestination.address = addressLabel!.text!
             mydestination.position = selectedPosition
+            mydestination.screenType = ScreenType.AddResto
         }
     }
 

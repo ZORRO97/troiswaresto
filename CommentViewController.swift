@@ -119,11 +119,11 @@ class CommentViewController: UIViewController {
     // MARK: - Remonter la vue avec le clavier
     
      func textFieldDidBeginEditing(textField: UITextField) {
-     animateViewMoving(true, moveValue: 150)
+     animateViewMoving(true, moveValue: 100)
      }
      
      func textFieldDidEndEditing(textField: UITextField) {
-     animateViewMoving(false, moveValue: 150)
+     animateViewMoving(false, moveValue: 100)
      }
      
      func animateViewMoving (up:Bool, moveValue :CGFloat){

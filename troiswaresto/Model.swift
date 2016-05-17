@@ -17,6 +17,7 @@ enum ScreenType {
     case AddResto
     case AllRestos
     case OneResto
+    case UpdateResto
 }
 
 enum PinType {
@@ -188,7 +189,10 @@ func getRestosInfoFirebase (tableview: UITableView, completion:(restos : [Resto]
                     
                     if let myImageId = item.value.objectForKey("imageId")  as? String {
                         getUIImageFromImageId(myImageId){ (imageUI) in
+                            //let resizedFactor = Int(imageUI!.size.width/200)  // à voir
                             myResto.image = imageUI
+                                //reduceImage(imageUI!, factor: resizedFactor)
+                            
                             NSLog("image chargée \(myImageId)")
                             tableview.reloadData()
                         }
@@ -354,12 +358,16 @@ func uploadImageToFirebase(image: UIImage, completion: (imageId : String?)->Void
     
     
     //reduction de la taille de l'image si elle est trop grande
-    var resizedImage = image
+    //var resizedImage = image
+    /*
     if image.size.width > 2400 {
         logWarning("initial size=\(image.size)")
         resizedImage = reduceImage(image, factor: 2)
         logWarning("reduced size=\(resizedImage.size)")
     }
+     */
+    let resizedFactor = Int(image.size.width/200)
+    let resizedImage = reduceImage(image, factor: resizedFactor)
     
     if let myData: NSData = UIImageJPEGRepresentation(resizedImage, 0.5) {
         let imageString = myData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))

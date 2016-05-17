@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UQj-9M-rMd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UQj-9M-rMd">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -234,7 +234,7 @@
                 <viewControllerPlaceholder storyboardName="Connection" referencedIdentifier="login" id="Tbt-Ev-Aax" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rYa-gB-gqb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2411" y="440"/>
+            <point key="canvasLocation" x="2327" y="352"/>
         </scene>
         <!--Détail resto-->
         <scene sceneID="TLa-Ex-JIF">
@@ -490,11 +490,18 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Détail resto" id="94h-U3-Asm">
-                        <barButtonItem key="rightBarButtonItem" title="Carte" id="nnH-nj-mBd">
-                            <connections>
-                                <segue destination="ti8-ur-J8k" kind="show" identifier="tomapone" id="vH3-nL-S2H"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Carte" id="nnH-nj-mBd">
+                                <connections>
+                                    <segue destination="ti8-ur-J8k" kind="show" identifier="tomapone" id="vH3-nL-S2H"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="edit" id="CDu-zu-utF">
+                                <connections>
+                                    <action selector="editButtonPressed" destination="LO5-aE-ZCn" id="H3j-H2-MnU"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -513,6 +520,7 @@
                         <outlet property="reviewTableView" destination="pMO-24-KHb" id="8qi-fF-SsH"/>
                         <segue destination="emh-pg-ddj" kind="show" identifier="addComment" id="IMk-nM-UKg"/>
                         <segue destination="Tbt-Ev-Aax" kind="presentation" identifier="detailtologin" id="iC6-RA-PAi"/>
+                        <segue destination="sYc-Sn-4dF" kind="show" identifier="detailtoupdateresto" id="4T6-wB-b55"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8le-5E-pWA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1055,8 +1063,9 @@
         <image name="plus" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JaR-O0-9IB"/>
         <segue reference="zOK-D1-npe"/>
+        <segue reference="JaR-O0-9IB"/>
+        <segue reference="4T6-wB-b55"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

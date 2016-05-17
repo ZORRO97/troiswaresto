@@ -29,11 +29,18 @@ class NewRestoViewController: UIViewController , UIImagePickerControllerDelegate
     var position : CLLocation!
     var priceRange : PriceRange = .Normal
     var userCoreData : CoreDataUser!
+    var screenType: ScreenType!
     
     func initDisplay(){
         saveButton.setTitle("main.save".translate, forState: .Normal)
         
         cancelButton.setTitle("main.cancel".translate, forState: .Normal)
+        
+        if screenType == ScreenType.AddResto {
+        self.title = "Nouveau resto"
+        } else {
+            self.title = "Edition resto"
+        }
     }
     
     // action effectuée lorsqu'on tape en dehors de la zone de saisie
@@ -78,14 +85,19 @@ class NewRestoViewController: UIViewController , UIImagePickerControllerDelegate
     
     @IBAction func saveRestoValidate(){
         NSLog("on va le sauver ce resto")
+        if screenType == ScreenType.AddResto  {
         NSLog("tentative de sauvegarde pour nom \(nameTextField.text) description  \(descriptionTextView.text) adresse \(address) priceRange \(priceRange) position \(position)")
         
         addRestoInCloud(nameTextField.text!, address: address, position: position, description: descriptionTextView.text, priceRange: priceRange, image: restoImageView.image, completionhandler: { success in
-            logWarning("on a enregistré this fucking resto")
+            logWarning("on a enregistré le resto")
             simpleAlert("Enregistrement nouveau resto", message: "" , controller: self, positiveAction: { _ in
                 self.performSegueWithIdentifier("backToRestos", sender: self)
             })
         })
+        } else {
+            
+            NSLog("on est en modif module à compléter")
+        }
     }
     
     

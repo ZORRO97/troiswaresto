@@ -36,6 +36,12 @@ class RestoDetailViewController: UIViewController {
     var reviews = [Review]()
     var coreUser : CoreDataUser!
     
+    @IBAction func editButtonPressed(){
+        
+        // TODO: tester si l'user est l'admin ou l'user ayant créé le resto
+        self.performSegueWithIdentifier("detailtoupdateresto", sender: self)
+    }
+    
    
     
     func initReview(){
@@ -65,6 +71,14 @@ class RestoDetailViewController: UIViewController {
             mydestination.allRestos = restos
             mydestination.screenType = ScreenType.OneResto
                 
+        }
+        if segue.identifier == "detailtoupdateresto" {
+            let mydestination : NewRestoViewController = segue.destinationViewController as! NewRestoViewController
+            mydestination.newResto = resto
+            
+            mydestination.restos = restos
+            mydestination.screenType = ScreenType.UpdateResto
+            
         }
     }
 
